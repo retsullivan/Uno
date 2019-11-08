@@ -34,6 +34,25 @@ public class HandTest {
     }
 
     @Test
+    public void playCard_Removes_and_Adds_correctly(){
+
+        //arrange
+        this.deck = deck;
+        this.hand = hand;
+        Card card = new Card(Faces.Draw4, Colors.Wild);
+        hand.addCard(card);
+        //Act
+        var discardPileSize = deck.getDiscardPile().size();
+        var handsize = hand.getHand().size();
+        hand.playCard(card);
+        var newHandSize = hand.getHand().size();
+        var newDiscardPileSize = deck.getDiscardPile().size();
+        //Assert
+        assertTrue(discardPileSize+1==newDiscardPileSize
+                && handsize-1==newHandSize);
+    }
+
+    @Test
     public void drawCard_removes_and_adds_Correctly(){
         //arrange
         this.deck = deck;

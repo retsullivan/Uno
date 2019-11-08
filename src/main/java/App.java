@@ -14,6 +14,6 @@ public class App {
         }
 
         System.out.println(deck.getDrawPile().size());
-        System.out.println(deck.getDisCards().size());
+        System.out.println(deck.getDiscardPile().size());
     }
 }

@@ -47,7 +47,7 @@ public class Deck {
     public ArrayList<Card> getDrawPile(){
         return drawpile;
     }
-    public ArrayList<Card> getDisCards(){
+    public ArrayList<Card> getDiscardPile(){
         return discardPile;
     }
 

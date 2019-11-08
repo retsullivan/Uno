@@ -33,9 +33,6 @@ public class CardTest {
     }
     @Test
     public void toString_returns_correct_info(){
-
-        //return color.toString() + " " + face.toString();
-
         //arrange
         Card name = new Card(Faces.Seven, Colors.Green);
 

@@ -22,8 +22,12 @@ public class Hand {
         hand.add(card);
     }
 
+    public void addCard(Card card){
+        hand.add(card);
+    }
+
     public void playCard(Card card){
-        deck.getDisCards().add(card);
+        deck.getDiscardPile().add(card);
         hand.remove(card);
     }
 
