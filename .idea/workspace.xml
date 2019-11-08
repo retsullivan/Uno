@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="15505e80-b873-443e-b7aa-b14c11264f1b" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1TKyx1WNWLzU5o9Ni5vT7U4qQ4N" />
+  <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.HandTest.drawCard_removes_and_adds_Correctly">
+    <configuration name="CardTest.equals_returns_true_when_same_card" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Uno" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CardTest" />
+      <option name="METHOD_NAME" value="equals_returns_true_when_same_card" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DeckTest.draw_returns_card_on_top_of_deck" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Uno" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DeckTest" />
+      <option name="METHOD_NAME" value="draw_returns_card_on_top_of_deck" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HandTest.drawCard_removes_and_adds_Correctly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Uno" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="HandTest" />
+      <option name="METHOD_NAME" value="drawCard_removes_and_adds_Correctly" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HandTest.drawCard_returns_top_Card" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Uno" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="HandTest" />
+      <option name="METHOD_NAME" value="drawCard_returns_top_Card" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HandTest.getStartingHand_returns_7_cards" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Uno" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="HandTest" />
+      <option name="METHOD_NAME" value="getStartingHand_returns_7_cards" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.HandTest.drawCard_removes_and_adds_Correctly" />
+        <item itemvalue="JUnit.HandTest.drawCard_returns_top_Card" />
+        <item itemvalue="JUnit.CardTest.equals_returns_true_when_same_card" />
+        <item itemvalue="JUnit.HandTest.getStartingHand_returns_7_cards" />
+        <item itemvalue="JUnit.DeckTest.draw_returns_card_on_top_of_deck" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="15505e80-b873-443e-b7aa-b14c11264f1b" name="Default Changelist" comment="" />
+      <created>1573223324659</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1573223324659</updated>
+    </task>
+    <servers />
+  </component>
+</project>
