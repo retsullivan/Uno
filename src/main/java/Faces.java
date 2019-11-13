@@ -15,6 +15,17 @@ public enum Faces {
     }
 
 
+    public Boolean equals(Faces face2){
+        boolean isequal = false;
+
+        if(this.ordinal()==face2.ordinal()){
+            isequal=true;
+        }
+
+        return isequal;
+    }
+
+
 
 
 }

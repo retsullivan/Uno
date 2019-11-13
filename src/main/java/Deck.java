@@ -28,7 +28,8 @@ public class Deck {
     public Card draw(){
 //        var randomIndex = random.nextInt(cards.size()); //old shuffle method
         if (drawPile.size()==0){
-            Card topCard = discardPile.remove(0);
+            Card topCard = discardPile.get(0);
+            discardPile.remove(0);
             drawPile = discardPile;
             discardPile.clear();
             Collections.shuffle(drawPile);

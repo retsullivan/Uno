@@ -63,7 +63,7 @@ public class GameTest {
     }
 
     @Test
-    public void when_card_played_equals_true_handSize_goes_down_ONE_and_discardPile_size_goes_up_One(){
+    public void when_card_played_handSize_goes_down_ONE_and_discardPile_size_goes_up_One(){
         //arrange
         this.deck=deck;
         this.game=game;
@@ -83,7 +83,7 @@ public class GameTest {
 
         //assert
         assertTrue(handSize-1 == player.getHandSize());
-        assertTrue(discardPileSize + 1 == game.getDeck().getDiscardPile().size());
+        assertEquals(2,game.getDeck().getDiscardPile().size());
     }
 
     @Test
@@ -117,7 +117,129 @@ public class GameTest {
         assertTrue(card.toString().equalsIgnoreCase(topCard.getCard().toString()));
     }
 
+    @Test
+    public void draw4_makes_next_Player_draw_4(){ //not currentPLayer
 
+        //arrange
+        this.deck = deck;
+        this.game = game;
 
+        Player player1 = new Player(game.getStartingHand(deck));
+        Player player2 = new Player(game.getStartingHand(deck));
+        Player player3 = new Player(game.getStartingHand(deck));
 
+        deck.addCardToDiscardPile(new Card(Faces.Draw4, Colors.Wild));
+
+        game.addPlayer(player1);
+        game.addPlayer(player2);
+        game.addPlayer(player3);
+
+        game.setDeck(deck);
+        game.setNumPlayers(3);
+
+        game.currentTurn=0;
+        game.turnDirection=1;
+
+        game.executeCardAction(new Card(Faces.Draw4, Colors.Wild), game);
+
+        //Act
+
+        //Assert
+        assertEquals(7, player1.getHandSize());
+        assertEquals(11,player2.getHandSize());
+        assertEquals(7, player3.getHandSize());
     }
+
+    @Test
+    public void draw2_makes_next_Player_draw2(){ //not currentPLayer
+
+        //arrange
+        this.deck = deck;
+        this.game = game;
+
+        Player player1 = new Player(game.getStartingHand(deck));
+        Player player2 = new Player(game.getStartingHand(deck));
+        Player player3 = new Player(game.getStartingHand(deck));
+
+        deck.addCardToDiscardPile(new Card(Faces.Draw2, Colors.Blue));
+
+        game.addPlayer(player1);
+        game.addPlayer(player2);
+        game.addPlayer(player3);
+
+        game.setDeck(deck);
+        game.setNumPlayers(3);
+
+        game.currentTurn=1;
+        game.turnDirection=1;
+
+        game.executeCardAction(new Card(Faces.Draw2, Colors.Blue), game);
+
+        //Act
+
+        //Assert
+        assertEquals(7, player1.getHandSize());
+        assertEquals(7,player2.getHandSize());
+        assertEquals(9, player3.getHandSize());
+    }
+
+    @Test
+    public void skip_increments_current_turn_by_ONE(){
+
+        //arrange
+        this.game = game;
+        game.currentTurn=1;
+        game.turnDirection=1;
+        //Act
+        game.executeCardAction(new Card(Faces.Skip, Colors.Blue), game);
+        //Assert
+        assertEquals(2,game.currentTurn);
+    }
+
+    @Test
+    public void reverse_changes_turn_direction(){
+
+        //arrange
+        this.game = game;
+
+        game.currentTurn=1;
+        game.turnDirection=1;
+        //Act
+        game.executeCardAction(new Card(Faces.Reverse, Colors.Blue), game);
+        //Assert
+        assertEquals(-1,game.turnDirection);
+    }
+
+//    @Test
+//    public void players_can_get_current_player_if_current_turn_is_negative(){
+//
+//        //arrange
+//        this.game = game;
+//
+//
+//        Player player1 = new Player(game.getStartingHand(deck));
+//        Player player2 = new Player(game.getStartingHand(deck));
+//        Player player3 = new Player(game.getStartingHand(deck));
+//
+//        deck.addCardToDiscardPile(new Card(Faces.Draw2, Colors.Blue));
+//
+//        game.addPlayer(player1);
+//        game.addPlayer(player2);
+//        game.addPlayer(player3);
+//
+//        game.setDeck(deck);
+//        game.setNumPlayers(3);
+//
+//        game.currentTurn=-1;
+//
+//        //Act
+//        int currentPlayerIndex = game.currentTurn%(3);
+//        var currentPlayer = game.getPlayers().get(currentPlayerIndex);
+//
+//        //Assert
+//        assertEquals(2, currentPlayerIndex);
+//        assertEquals(2, game.getPlayers().indexOf(currentPlayer));
+//    }
+
+
+}

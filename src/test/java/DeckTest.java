@@ -32,6 +32,21 @@ public class DeckTest {
         assertTrue(deck.getDrawPile().size()==beforeSize-1);
     }
 
+    @Test
+    public void add_card_to_discard_pile_increases_size_by_ONE(){
+        //arrange
+        this.deck = deck;
+        var beforeSize = deck.getDiscardPile().size();
+
+        //act
+        deck.addCardToDiscardPile(new Card(Faces.Five, Colors.Red));
+        deck.addCardToDiscardPile(new Card(Faces.Five, Colors.Red));
+
+        //assert
+        assertEquals(2,deck.getDiscardPile().size());
+    }
+
+
 
 
 

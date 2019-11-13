@@ -7,24 +7,21 @@ public class Game {
     private Deck deck = new Deck();
     private ArrayList<Player> players = new ArrayList<>();
     private Player player = new Player();
-    private GameOverException GameOverException;
-    private Boolean previousTurnSkipped = false;
     boolean gameInProgress = true;
     private TopCard topCard = new TopCard();
-    private int numPlayers = 1;
-    private int nextPlayer=0;
-    private int turnDirection = 1;
+
+
+
+
+    private int numPlayers;
+    private int currentPlayer=0;
+    public int turnDirection = 1;
+    public int currentTurn = 0;
+    Scanner scanner = new Scanner(System.in);
 
     public Game(){
     }
 
-    public Player getPlayer(int playerNum) {return players.get(playerNum+1);}
-    public Boolean getPreviousTurnSkipped() {
-        return previousTurnSkipped;
-    }
-    public void setPreviousTurnSkipped(Boolean previousTurnSkipped) {
-        this.previousTurnSkipped = previousTurnSkipped;
-    }
     public Deck getDeck() {
         return deck;
     }
@@ -32,10 +29,18 @@ public class Game {
         this.deck = deck;
     }
     public TopCard getTopCard (){return topCard;}
+    public void setNumPlayers(int numPlayers) {this.numPlayers = numPlayers;}
+    public ArrayList<Player> getPlayers() {return players;}
+    public void addPlayer(Player player) {players.add(player);}
 
 
 
-    public void Play(Game game) throws GameOverException {
+    public void Play(Game game) {
+        System.out.println("How many players?");
+        numPlayers=scanner.nextInt();
+        gameInProgress = true;
+        currentTurn = 0;
+        turnDirection = 1;
 
         this.deck=game.getDeck();
         arrangeStartingDeck(deck);                  //getting deck ready
@@ -44,36 +49,40 @@ public class Game {
             players.add(new Player(hand));
         }
 
-        //placing top card on discardpile
-        arrangeStartingDeck(deck);
-        gameInProgress = true;
-
-        int currentTurn = 1;
-        int turnDirection = 1;
+        if (hasAction(topCard.getCard())){
+            executeCardAction(topCard.getCard(),game);
+        }
 
         while (gameInProgress){
-            nextPlayer = currentTurn%players.size();
-            try{
-                this.player = players.get(nextPlayer);
-                Card playedCard = player.takeTurn(game);
-                if(player.getHandSize()==0 ){
-                     throw GameOverException;
-                } else{
-                    if (playedCard!=null) {
-                        if (hasAction(playedCard)) {
-                            executeCardAction(playedCard, game);
-                        }
+            //this is making sure that we don't % a negative number
+            if(currentTurn<0){
+                currentTurn = currentTurn+players.size();
+            }
+            currentPlayer = currentTurn%(players.size());
+            System.out.println("Current Player is Player Number" +currentPlayer);
+            this.player = players.get(currentPlayer);
+            Card faceUp = topCard.getCard();
+            System.out.println("The top card is " + topCard.getCard().toString()+".");
+            Card playedCard = player.takeTurn(game);
+            if(player.getHandSize()==0 ){
+                System.out.println("Player " + players.get(currentPlayer) +"has won the game!");
+                gameInProgress=false;
+            } else{
+                if (!playedCard.toString().equalsIgnoreCase("No card ")) {
+                    System.out.println("Player " + players.get(currentPlayer) +" played " + playedCard.toString() + " on " +faceUp.toString()+".");
+                    if (hasAction(playedCard)) {
+                        executeCardAction(playedCard, game);
                     }
-                    //do this after every turn
-                    //turn direction will go back and forth
-                    currentTurn = currentTurn+turnDirection;
                 }
-            }catch (GameOverException goe){
-                System.out.println("Game Over");
-                gameInProgress = false;
+                //do this after every turn
+                //turn direction will go back and forth
+                currentTurn = currentTurn + turnDirection;
             }
         }
+        System.out.println("Game Over");
+
     }
+
 
 
 
@@ -116,18 +125,19 @@ public class Game {
         boolean playable = false;
 
         if (fromHand.getFace().toString().equalsIgnoreCase(topCard.getCard().getFace().toString()) ||
-                fromHand.getColor().toString().equals(topCard.getCard().getColor().toString()) ||
-                fromHand.getColor().toString().equalsIgnoreCase("wild") ||
-                topCard.getCard().getColor().toString().equalsIgnoreCase("wild")) {
+                fromHand.getColor().toString().equals(topCard.getDeclaredColor().toString()) ||
+                fromHand.getColor().toString().equalsIgnoreCase("wild")) {
             playable = true;
         }
         return playable;
     }
 
     public void playCard(Card card, Colors declaredColor){
-        getDeck().getDiscardPile().add(card);
-        topCard.setCard(card);
-        topCard.setDeclaredColor(declaredColor);
+        if (!card.toString().equalsIgnoreCase("No card ")) {
+            deck.addCardToDiscardPile(card);
+            topCard.setCard(card);
+            topCard.setDeclaredColor(declaredColor);
+        }
     }
 
     public Boolean hasAction(Card card) {
@@ -136,37 +146,43 @@ public class Game {
             return true;
         } else if (card.getFace().toString().equalsIgnoreCase("draw2")) {
             return true;
-        } else {
+        } else if (card.getFace().toString().equalsIgnoreCase("skip")) {
+            return true;
+        }else if (card.getFace().toString().equalsIgnoreCase("reverse")) {
+            return true;
+        }else {
             return false;
         }
-        //||card.getFace().toString().equalsIgnoreCase("skip")
-        //||card.getFace().toString().equalsIgnoreCase("reverse")
 
     }
 
     public void executeCardAction(Card card, Game game){
-            if (card.getFace().toString().equalsIgnoreCase("Draw2")) {
-                players.get(nextPlayer+1).drawCard(game);
-                players.get(nextPlayer+1).drawCard(game);
 
-                game.nextPlayer= nextPlayer + game.turnDirection;
-            } else if (card.getFace().toString().equalsIgnoreCase("Draw4")) {
-                players.get(nextPlayer+1).drawCard(game);
-                players.get(nextPlayer+1).drawCard(game);
-                players.get(nextPlayer+1).drawCard(game);
-                players.get(nextPlayer+1).drawCard(game);
+            if (Faces.Draw2.equals(card.getFace())) {
+                var nextPlayerIndex = (currentTurn+turnDirection)%players.size();
+                players.get(nextPlayerIndex);
+                players.get(nextPlayerIndex).drawCard(game);
+                players.get(nextPlayerIndex).drawCard(game);
+                //this skips the next player
+                currentTurn = currentTurn + turnDirection;
+            } else if (Faces.Draw4.equals(card.getFace())) {
+                var nextPlayerIndex = (currentTurn+turnDirection)%players.size();
+                //this.player = players.get(nextPlayer);
+                players.get(nextPlayerIndex);
+                players.get(nextPlayerIndex).drawCard(game);
+                players.get(nextPlayerIndex).drawCard(game);
+                players.get(nextPlayerIndex).drawCard(game);
+                players.get(nextPlayerIndex).drawCard(game);
+                //player.drawCard(game);
+                   //this skips the next player
+                currentTurn = currentTurn + turnDirection;
 
-                game.nextPlayer= nextPlayer + game.turnDirection;
-
+            } else if (Faces.Skip.equals(card.getFace())) {
+                currentTurn = currentTurn + turnDirection;
+            } else if (Faces.Reverse.equals(card.getFace())) {
+                turnDirection= turnDirection*(-1);
             }
-            //if (topCard.getFace().toString().equalsIgnoreCase("Skip")){
-            //game.nextPlayer= nextPlayer + game.turnDirection;
-            //}
-            //if (topCard.getFace().toString().equalsIgnoreCase("Reverse")){
-            //game.turnDirection = turnDirection*(-1);
-            //game.nextPlayer= nextPlayer + game.turnDirection; }
-
-        }
+    }
 
 
 }

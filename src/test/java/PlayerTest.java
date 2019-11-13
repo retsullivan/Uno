@@ -38,7 +38,36 @@ public class PlayerTest {
 
         //assert
         assertTrue(startingSize-1 == game.getDeck().getDrawPile().size());
+    }
 
+    @Test
+    public void draw_Card_returns_1_card() {
+        //arrange
+        this.deck = deck;
+        this.player = new Player(playerHand);
+        //Act
+
+        player.drawCard(game);
+
+        //assert
+        assertEquals(1,playerHand.size());
+    }
+
+    @Test
+    public void draw_Card_adds_1_card_to_Hand() {
+        //arrange
+        this.deck = deck;
+        Card card1 = new Card(Faces.Draw4, Colors.Wild);
+        Card card2 = new Card(Faces.Five, Colors.Red);
+        playerHand.add(card1);
+        playerHand.add(card2);
+        this.player = new Player(playerHand);
+        //Act
+
+        Card card3 = player.drawCard(game);
+
+        //assert
+        assertEquals(3,playerHand.size());
     }
 
     @Test
@@ -66,14 +95,13 @@ public class PlayerTest {
         Card card2 = new Card(Faces.Five, Colors.Red);
         playerHand.add(card1);
         playerHand.add(card2);
+        this.player = new Player(playerHand);
         //Act
-        var discardPileSize = deck.getDiscardPile().size();
-        var handSize = playerHand.size();
+
         player.playCard(card1, game);
-        var newHandSize = playerHand.size();
-        var newDiscardPileSize = deck.getDiscardPile().size();
+
         //Assert
-        assertTrue(handSize-1==newHandSize);
+        assertEquals(1,player.getHandSize());
     }
 
     @Test
@@ -86,7 +114,7 @@ public class PlayerTest {
         Card card = new Card(Faces.Five, Colors.Red);
         playerHand.add(card);
         //Act
-        Card playedCard = player.playCard(card, game);
+        player.playCard(card, game);
         var color = player.declareColor(card,game);
         //Assert
         assertTrue(game.getTopCard().getDeclaredColor().toString().equalsIgnoreCase(color.toString()));
