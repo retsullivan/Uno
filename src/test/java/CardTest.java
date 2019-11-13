@@ -49,7 +49,7 @@ public class CardTest {
         Card card1 = new Card(Faces.Reverse, Colors.Blue);
         Card card2 = new Card(Faces.Reverse, Colors.Blue);
 
-        assertTrue(card1.equals(card2));
+        assertTrue(card.equals(card1,card2));
     }
 
 

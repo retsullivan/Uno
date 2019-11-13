@@ -21,13 +21,15 @@ public class DeckTest {
     }
 
     @Test
-    public void draw_returns_card_on_top_of_deck(){
+    public void draw_returns_card_on_top_of_deck_and_reduces_deck_size_by_One(){
         //arrange
         this.deck = deck;
+        var beforeSize = deck.getDrawPile().size();
         ArrayList<Card> cards =  deck.getDrawPile();
         //act
         //assert
         assertTrue(cards.get(0)==deck.draw());
+        assertTrue(deck.getDrawPile().size()==beforeSize-1);
     }
 
 
