@@ -1,6 +1,5 @@
 import org.junit.Test;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,7 +8,7 @@ public class PlayerTest {
     Deck deck = new Deck();
 
     ArrayList<Card> playerHand = new ArrayList<>();
-    Player player = new Player();
+    TestablePlayer player = new TestablePlayer();
     Game game = new Game();
 
 
@@ -21,9 +20,9 @@ public class PlayerTest {
         playerHand.add(new Card(Faces.Six,Colors.Blue));
         playerHand.add(new Card(Faces.Six,Colors.Red));
         //act
-        this.player = new Player(playerHand);
+        this.player = new TestablePlayer(playerHand);
 
-        assertTrue(playerHand.size()==player.getHandSize());
+        assertTrue(playerHand.size()== player.getHandSize());
 
     }
 
@@ -44,7 +43,7 @@ public class PlayerTest {
     public void draw_Card_returns_1_card() {
         //arrange
         this.deck = deck;
-        this.player = new Player(playerHand);
+        this.player = new TestablePlayer(playerHand);
         //Act
 
         player.drawCard(game);
@@ -61,7 +60,7 @@ public class PlayerTest {
         Card card2 = new Card(Faces.Five, Colors.Red);
         playerHand.add(card1);
         playerHand.add(card2);
-        this.player = new Player(playerHand);
+        this.player = new TestablePlayer(playerHand);
         //Act
 
         Card card3 = player.drawCard(game);
@@ -74,7 +73,7 @@ public class PlayerTest {
     public void drawCard_returns_top_Card_of_drawPile(){
         //arrange
         this.game=game;
-        this.player=player;
+        this.player = player;
         this.deck = deck;
         game.arrangeStartingDeck(deck);
         //act
@@ -95,13 +94,13 @@ public class PlayerTest {
         Card card2 = new Card(Faces.Five, Colors.Red);
         playerHand.add(card1);
         playerHand.add(card2);
-        this.player = new Player(playerHand);
+        this.player = new TestablePlayer(playerHand);
         //Act
 
         player.playCard(card1, game);
 
         //Assert
-        assertEquals(1,player.getHandSize());
+        assertEquals(1, player.getHandSize());
     }
 
     @Test

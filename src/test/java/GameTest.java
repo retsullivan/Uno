@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
     Deck deck = new Deck();
-    Player player = new Player();
+    TestablePlayer player = new TestablePlayer();
     Game game = new Game();
     ArrayList<Card> playerHand = new ArrayList<>();
 
@@ -73,7 +73,7 @@ public class GameTest {
         playerHand.add(new Card(Faces.Draw4, Colors.Wild));
         playerHand.add(new Card(Faces.Wild, Colors.Wild));
 
-        this.player = new Player(playerHand);
+        this.player = new TestablePlayer(playerHand);
         var handSize = player.getHandSize();
         var discardPileSize = game.getDeck().getDiscardPile().size();
         Card card = playerHand.get(0);
@@ -124,15 +124,15 @@ public class GameTest {
         this.deck = deck;
         this.game = game;
 
-        Player player1 = new Player(game.getStartingHand(deck));
-        Player player2 = new Player(game.getStartingHand(deck));
-        Player player3 = new Player(game.getStartingHand(deck));
+        RPlayer RPlayer1 = new RPlayer(game.getStartingHand(deck));
+        RPlayer RPlayer2 = new RPlayer(game.getStartingHand(deck));
+        RPlayer RPlayer3 = new RPlayer(game.getStartingHand(deck));
 
         deck.addCardToDiscardPile(new Card(Faces.Draw4, Colors.Wild));
 
-        game.addPlayer(player1);
-        game.addPlayer(player2);
-        game.addPlayer(player3);
+        game.addPlayer(RPlayer1);
+        game.addPlayer(RPlayer2);
+        game.addPlayer(RPlayer3);
 
         game.setDeck(deck);
         game.setNumPlayers(3);
@@ -145,9 +145,9 @@ public class GameTest {
         //Act
 
         //Assert
-        assertEquals(7, player1.getHandSize());
-        assertEquals(11,player2.getHandSize());
-        assertEquals(7, player3.getHandSize());
+        assertEquals(7, RPlayer1.getHandSize());
+        assertEquals(11, RPlayer2.getHandSize());
+        assertEquals(7, RPlayer3.getHandSize());
     }
 
     @Test
@@ -157,15 +157,15 @@ public class GameTest {
         this.deck = deck;
         this.game = game;
 
-        Player player1 = new Player(game.getStartingHand(deck));
-        Player player2 = new Player(game.getStartingHand(deck));
-        Player player3 = new Player(game.getStartingHand(deck));
+        RPlayer RPlayer1 = new RPlayer(game.getStartingHand(deck));
+        RPlayer RPlayer2 = new RPlayer(game.getStartingHand(deck));
+        RPlayer RPlayer3 = new RPlayer(game.getStartingHand(deck));
 
         deck.addCardToDiscardPile(new Card(Faces.Draw2, Colors.Blue));
 
-        game.addPlayer(player1);
-        game.addPlayer(player2);
-        game.addPlayer(player3);
+        game.addPlayer(RPlayer1);
+        game.addPlayer(RPlayer2);
+        game.addPlayer(RPlayer3);
 
         game.setDeck(deck);
         game.setNumPlayers(3);
@@ -178,9 +178,9 @@ public class GameTest {
         //Act
 
         //Assert
-        assertEquals(7, player1.getHandSize());
-        assertEquals(7,player2.getHandSize());
-        assertEquals(9, player3.getHandSize());
+        assertEquals(7, RPlayer1.getHandSize());
+        assertEquals(7, RPlayer2.getHandSize());
+        assertEquals(9, RPlayer3.getHandSize());
     }
 
     @Test

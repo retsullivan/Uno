@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Game {
 
     private Deck deck = new Deck();
-    private ArrayList<Player> players = new ArrayList<>();
-    private Player player = new Player();
+    private ArrayList<RPlayer> RPlayers = new ArrayList<>();
+    private RPlayer RPlayer = new RPlayer();
     boolean gameInProgress = true;
     private TopCard topCard = new TopCard();
 
@@ -30,12 +30,14 @@ public class Game {
     }
     public TopCard getTopCard (){return topCard;}
     public void setNumPlayers(int numPlayers) {this.numPlayers = numPlayers;}
-    public ArrayList<Player> getPlayers() {return players;}
-    public void addPlayer(Player player) {players.add(player);}
+    public ArrayList<RPlayer> getRPlayers() {return RPlayers;}
+    public void addPlayer(RPlayer RPlayer) {
+        RPlayers.add(RPlayer);}
 
 
 
     public void Play(Game game) {
+        System.out.println("Welcome to Uno!");
         System.out.println("How many players?");
         numPlayers=scanner.nextInt();
         gameInProgress = true;
@@ -46,7 +48,7 @@ public class Game {
         arrangeStartingDeck(deck);                  //getting deck ready
         for (int i = 0; i <numPlayers ; i++) {      //creating players with starting hands
             ArrayList<Card> hand = getStartingHand(deck);
-            players.add(new Player(hand));
+            RPlayers.add(new RPlayer(hand));
         }
 
         if (hasAction(topCard.getCard())){
@@ -56,20 +58,21 @@ public class Game {
         while (gameInProgress){
             //this is making sure that we don't % a negative number
             if(currentTurn<0){
-                currentTurn = currentTurn+players.size();
+                currentTurn = currentTurn+ RPlayers.size();
             }
-            currentPlayer = currentTurn%(players.size());
+            currentPlayer = currentTurn%(RPlayers.size());
             System.out.println("Current Player is Player Number" +currentPlayer);
-            this.player = players.get(currentPlayer);
+            this.RPlayer = RPlayers.get(currentPlayer);
             Card faceUp = topCard.getCard();
             System.out.println("The top card is " + topCard.getCard().toString()+".");
-            Card playedCard = player.takeTurn(game);
-            if(player.getHandSize()==0 ){
-                System.out.println("Player " + players.get(currentPlayer) +"has won the game!");
+            Card playedCard = RPlayer.takeTurn(game);
+            if(RPlayer.getHandSize()==0 ){
+                System.out.println("Player " + currentPlayer +"has won the game!");
+                game.displayGameOver();
                 gameInProgress=false;
             } else{
                 if (!playedCard.toString().equalsIgnoreCase("No card ")) {
-                    System.out.println("Player " + players.get(currentPlayer) +" played " + playedCard.toString() + " on " +faceUp.toString()+".");
+                    System.out.println("Player " + currentPlayer +" played " + playedCard.toString() + " on " +faceUp.toString()+".");
                     if (hasAction(playedCard)) {
                         executeCardAction(playedCard, game);
                     }
@@ -159,30 +162,59 @@ public class Game {
     public void executeCardAction(Card card, Game game){
 
             if (Faces.Draw2.equals(card.getFace())) {
-                var nextPlayerIndex = (currentTurn+turnDirection)%players.size();
-                players.get(nextPlayerIndex);
-                players.get(nextPlayerIndex).drawCard(game);
-                players.get(nextPlayerIndex).drawCard(game);
+                var nextPlayerIndex = (currentTurn+turnDirection)% RPlayers.size();
+                RPlayers.get(nextPlayerIndex);
+                RPlayers.get(nextPlayerIndex).drawCard(game);
+                RPlayers.get(nextPlayerIndex).drawCard(game);
                 //this skips the next player
                 currentTurn = currentTurn + turnDirection;
+                System.out.println("Player " +nextPlayerIndex+ " drew 2 and skipped their turn.");
             } else if (Faces.Draw4.equals(card.getFace())) {
-                var nextPlayerIndex = (currentTurn+turnDirection)%players.size();
+                var nextPlayerIndex = (currentTurn+turnDirection)% RPlayers.size();
                 //this.player = players.get(nextPlayer);
-                players.get(nextPlayerIndex);
-                players.get(nextPlayerIndex).drawCard(game);
-                players.get(nextPlayerIndex).drawCard(game);
-                players.get(nextPlayerIndex).drawCard(game);
-                players.get(nextPlayerIndex).drawCard(game);
+                RPlayers.get(nextPlayerIndex);
+                RPlayers.get(nextPlayerIndex).drawCard(game);
+                RPlayers.get(nextPlayerIndex).drawCard(game);
+                RPlayers.get(nextPlayerIndex).drawCard(game);
+                RPlayers.get(nextPlayerIndex).drawCard(game);
                 //player.drawCard(game);
                    //this skips the next player
                 currentTurn = currentTurn + turnDirection;
+                System.out.println("Player " +nextPlayerIndex+ " drew 4 and skipped their turn.");
 
             } else if (Faces.Skip.equals(card.getFace())) {
-                currentTurn = currentTurn + turnDirection;
+                var nextPlayerIndex = (currentTurn+turnDirection)% RPlayers.size();
+                System.out.println("Player " +nextPlayerIndex+ " was skipped");
+
             } else if (Faces.Reverse.equals(card.getFace())) {
+
                 turnDirection= turnDirection*(-1);
+                System.out.println("Turn order reversed");
             }
+
+
     }
 
+    public void yellUno(){
+        System.out.println();
+        System.out.println("Player " + currentPlayer+ " yelled");;
+        System.out.println( "db    db d8b   db  .d88b. \n" +
+                            "88    88 888o  88 .8P  Y8.\n" +
+                            "88    88 88V8o 88 88    88\n" +
+                            "88    88 88 V8o88 88    88\n" +
+                            "88b  d88 88  V888 `8b  d8'\n" +
+                            "~Y8888P' VP   V8P  `Y88P' ");
 
+        System.out.println();
+    }
+    public void displayGameOver(){
+        System.out.println();
+        System.out.println(" d888b   .d8b.  .88b  d88. d88888b    .d88b.  db    db d88888b d8888b.\n" +
+                            "88' Y8b d8' `8b 88'YbdP`88 88'       .8P  Y8. 88    88 88'     88  `8D\n" +
+                            "88      88ooo88 88  88  88 88ooooo   88    88 Y8    8P 88ooooo 88oobY'\n" +
+                            "88  ooo 88~~~88 88  88  88 88~~~~~   88    88 `8b  d8' 88~~~~~ 88`8b  \n" +
+                            "88. ~8~ 88   88 88  88  88 88.       `8b  d8'  `8bd8'  88.     88 `88.\n" +
+                            " Y888P  YP   YP YP  YP  YP Y88888P    `Y88P'     YP    Y88888P 88   YD");
+        System.out.println();
+    }
 }
