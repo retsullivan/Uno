@@ -162,6 +162,9 @@ public class Game {
     public void executeCardAction(Card card, Game game){
 
             if (Faces.Draw2.equals(card.getFace())) {
+                if(currentTurn==0){
+                    currentTurn = currentTurn+ RPlayers.size();
+                }
                 var nextPlayerIndex = (currentTurn+turnDirection)% RPlayers.size();
                 RPlayers.get(nextPlayerIndex);
                 RPlayers.get(nextPlayerIndex).drawCard(game);
