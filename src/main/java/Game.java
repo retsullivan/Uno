@@ -34,8 +34,6 @@ public class Game {
     public void addPlayer(RPlayer RPlayer) {
         RPlayers.add(RPlayer);}
 
-
-
     public void Play(Game game) {
         System.out.println("Welcome to Uno!");
         System.out.println("How many players?");
@@ -160,7 +158,6 @@ public class Game {
     }
 
     public void executeCardAction(Card card, Game game){
-
             if (Faces.Draw2.equals(card.getFace())) {
                 if(currentTurn==0){
                     currentTurn = currentTurn+ RPlayers.size();
@@ -173,9 +170,11 @@ public class Game {
                 currentTurn = currentTurn + turnDirection;
                 System.out.println("Player " +nextPlayerIndex+ " drew 2 and skipped their turn.");
             } else if (Faces.Draw4.equals(card.getFace())) {
+                if(currentTurn==0){
+                    currentTurn = currentTurn+ RPlayers.size();
+                }
                 var nextPlayerIndex = (currentTurn+turnDirection)% RPlayers.size();
-                //this.player = players.get(nextPlayer);
-                RPlayers.get(nextPlayerIndex);
+//                RPlayers.get(nextPlayerIndex);
                 RPlayers.get(nextPlayerIndex).drawCard(game);
                 RPlayers.get(nextPlayerIndex).drawCard(game);
                 RPlayers.get(nextPlayerIndex).drawCard(game);

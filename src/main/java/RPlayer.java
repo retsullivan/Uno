@@ -46,7 +46,7 @@ public class RPlayer {
             if(hand.size()==1){
                 game.yellUno();
             }
-            return playedCard;
+
         }
 
         public Card drawCard(Game game) {
@@ -56,8 +56,8 @@ public class RPlayer {
         }
 
         public void playCard(Card card, Game game) {
-            Colors color = declareColor(card, game);
-            game.playCard(card, color);
+            Colors declaredcolor = declareColor(card, game);
+            game.playCard(card, declaredcolor);
             hand.remove(card);
         }
 

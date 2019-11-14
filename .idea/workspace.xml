@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15505e80-b873-443e-b7aa-b14c11264f1b" name="Default Changelist" comment="">
+    <list default="true" id="15505e80-b873-443e-b7aa-b14c11264f1b" name="Default Changelist" comment="fixed the fake card thing and skip">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Game.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +56,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.GameTest.skip_increments_current_turn_by_ONE">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="App" />
       <module name="Uno" />
@@ -100,11 +103,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.App" />
         <item itemvalue="JUnit.GameTest.skip_increments_current_turn_by_ONE" />
         <item itemvalue="JUnit.GameTest" />
         <item itemvalue="JUnit.DeckTest" />
         <item itemvalue="JUnit.CardTest" />
-        <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
   </component>
