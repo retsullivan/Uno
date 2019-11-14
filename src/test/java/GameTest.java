@@ -185,8 +185,16 @@ public class GameTest {
 
     @Test
     public void skip_increments_current_turn_by_ONE(){
-
+        RPlayer RPlayer1 = new RPlayer(game.getStartingHand(deck));
+        RPlayer RPlayer2 = new RPlayer(game.getStartingHand(deck));
+        RPlayer RPlayer3 = new RPlayer(game.getStartingHand(deck));
         //arrange
+        game.addPlayer(RPlayer1);
+        game.addPlayer(RPlayer2);
+        game.addPlayer(RPlayer3);
+
+        game.setDeck(deck);
+        game.setNumPlayers(3);
         this.game = game;
         game.currentTurn=1;
         game.turnDirection=1;

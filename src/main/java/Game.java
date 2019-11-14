@@ -71,7 +71,7 @@ public class Game {
                 game.displayGameOver();
                 gameInProgress=false;
             } else{
-                if (!playedCard.toString().equalsIgnoreCase("No card ")) {
+                if (!(playedCard == null)) {
                     System.out.println("Player " + currentPlayer +" played " + playedCard.toString() + " on " +faceUp.toString()+".");
                     if (hasAction(playedCard)) {
                         executeCardAction(playedCard, game);
@@ -183,9 +183,12 @@ public class Game {
                 System.out.println("Player " +nextPlayerIndex+ " drew 4 and skipped their turn.");
 
             } else if (Faces.Skip.equals(card.getFace())) {
-                var nextPlayerIndex = (currentTurn+turnDirection)% RPlayers.size();
+                if(currentTurn<0){
+                    currentTurn = currentTurn+ RPlayers.size();
+                }
+                var nextPlayerIndex = (currentTurn+turnDirection)%RPlayers.size();
                 System.out.println("Player " +nextPlayerIndex+ " was skipped");
-
+                currentTurn = currentTurn+turnDirection;
             } else if (Faces.Reverse.equals(card.getFace())) {
 
                 turnDirection= turnDirection*(-1);

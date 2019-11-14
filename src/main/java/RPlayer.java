@@ -18,7 +18,8 @@ public class RPlayer {
 
 
     public Card takeTurn(Game game) {
-            Card playedCard = new Card(Faces.Draw4, Colors.Blue);
+            Card playedCard = null;
+//            Card playedCard = new Card(Faces.Draw4, Colors.Blue);
             //Faces.Draw4, Colors.Blue is the fake card that "playedCard" is automatically
             //set to at the beginning of a turn if that is the card that is returned,
             // that means that the player was not able to play any card at all
