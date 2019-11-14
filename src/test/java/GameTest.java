@@ -15,7 +15,6 @@ public class GameTest {
         //arrange
         Card card1 = new Card(Faces.Four, Colors.Red);
         TopCard card2 = new TopCard(new Card(Faces.Six, Colors.Red), Colors.Red);
-
         //act
         boolean isPlayable = game.isPlayable(card1, card2);
         //assert
