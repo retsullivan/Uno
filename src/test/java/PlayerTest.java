@@ -8,7 +8,7 @@ public class PlayerTest {
     Deck deck = new Deck();
 
     ArrayList<Card> playerHand = new ArrayList<>();
-    TestablePlayer player = new TestablePlayer();
+    RPlayer player = new RPlayer();
     Game game = new Game();
 
 
@@ -20,7 +20,7 @@ public class PlayerTest {
         playerHand.add(new Card(Faces.Six,Colors.Blue));
         playerHand.add(new Card(Faces.Six,Colors.Red));
         //act
-        this.player = new TestablePlayer(playerHand);
+        this.player = new RPlayer(playerHand);
 
         assertTrue(playerHand.size()== player.getHandSize());
 
@@ -43,7 +43,7 @@ public class PlayerTest {
     public void draw_Card_returns_1_card() {
         //arrange
         this.deck = deck;
-        this.player = new TestablePlayer(playerHand);
+        this.player = new RPlayer(playerHand);
         //Act
 
         player.drawCard(game);
@@ -60,7 +60,8 @@ public class PlayerTest {
         Card card2 = new Card(Faces.Five, Colors.Red);
         playerHand.add(card1);
         playerHand.add(card2);
-        this.player = new TestablePlayer(playerHand);
+        this.player = new RPlayer(playerHand);
+        game.addPlayer(player);
         //Act
 
         Card card3 = player.drawCard(game);
@@ -89,12 +90,13 @@ public class PlayerTest {
         //arrange
         this.deck = deck;
         this.game = game;
-        this.player = player;
-        Card card1 = new Card(Faces.Draw4, Colors.Wild);
+
+        Card card1 = new Card(Faces.Wild, Colors.Wild);
         Card card2 = new Card(Faces.Five, Colors.Red);
         playerHand.add(card1);
         playerHand.add(card2);
-        this.player = new TestablePlayer(playerHand);
+        this.player = new RPlayer(playerHand);
+        game.addPlayer(player);
         //Act
 
         player.playCard(card1, game);

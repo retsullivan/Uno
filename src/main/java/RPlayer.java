@@ -17,8 +17,8 @@ public class RPlayer {
     }
 
 
-    public Card takeTurn(Game game) {
-            Card playedCard = null;
+    public void takeTurn(Game game) {
+
 //            Card playedCard = new Card(Faces.Draw4, Colors.Blue);
             //Faces.Draw4, Colors.Blue is the fake card that "playedCard" is automatically
             //set to at the beginning of a turn if that is the card that is returned,
@@ -29,7 +29,6 @@ public class RPlayer {
                 if (cardPlayed == false) {
                     if (game.isPlayable(card, game.getTopCard())) {
                         playCard(card, game);
-                        playedCard = card;
                         cardPlayed = true;
                         break;
                     }
@@ -40,7 +39,6 @@ public class RPlayer {
                 Card card = drawCard(game);
                 if (game.isPlayable(card, game.getTopCard())) {
                     playCard(card, game);
-                    playedCard = card;
                 }
             }
             if(hand.size()==1){

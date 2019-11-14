@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
     Deck deck = new Deck();
-    TestablePlayer player = new TestablePlayer();
+    RPlayer player = new RPlayer();
     Game game = new Game();
     ArrayList<Card> playerHand = new ArrayList<>();
 
@@ -67,22 +67,25 @@ public class GameTest {
         //arrange
         this.deck=deck;
         this.game=game;
+
+
         deck.addCardToDiscardPile(new Card(Faces.Five, Colors.Blue));
         game.setDeck(deck);
 
         playerHand.add(new Card(Faces.Draw4, Colors.Wild));
         playerHand.add(new Card(Faces.Wild, Colors.Wild));
 
-        this.player = new TestablePlayer(playerHand);
-        var handSize = player.getHandSize();
-        var discardPileSize = game.getDeck().getDiscardPile().size();
+        player = new RPlayer(playerHand);
+        game.addPlayer(player);
+        game.setNumPlayers(1);
+
         Card card = playerHand.get(0);
 
         //act
         player.playCard(card, game);
 
         //assert
-        assertTrue(handSize-1 == player.getHandSize());
+
         assertEquals(2,game.getDeck().getDiscardPile().size());
     }
 
