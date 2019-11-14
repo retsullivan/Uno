@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class RPlayer {
+public class RPlayer implements Player{
 
     private ArrayList<Card> hand = new ArrayList<>();
 
@@ -12,17 +12,13 @@ public class RPlayer {
         this.hand = hand;
     }
 
+    @Override
     public int getHandSize() {
         return hand.size();
     }
 
-
+    @Override
     public void takeTurn(Game game) {
-
-//            Card playedCard = new Card(Faces.Draw4, Colors.Blue);
-            //Faces.Draw4, Colors.Blue is the fake card that "playedCard" is automatically
-            //set to at the beginning of a turn if that is the card that is returned,
-            // that means that the player was not able to play any card at all
 
             boolean cardPlayed = false;
             for (Card card : hand) {
@@ -47,6 +43,7 @@ public class RPlayer {
 
         }
 
+        @Override
         public Card drawCard(Game game) {
             Card card = game.getDeck().draw();
             hand.add(card);

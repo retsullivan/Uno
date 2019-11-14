@@ -220,36 +220,4 @@ public class GameTest {
         assertEquals(-1,game.turnDirection);
     }
 
-//    @Test
-//    public void players_can_get_current_player_if_current_turn_is_negative(){
-//
-//        //arrange
-//        this.game = game;
-//
-//
-//        Player player1 = new Player(game.getStartingHand(deck));
-//        Player player2 = new Player(game.getStartingHand(deck));
-//        Player player3 = new Player(game.getStartingHand(deck));
-//
-//        deck.addCardToDiscardPile(new Card(Faces.Draw2, Colors.Blue));
-//
-//        game.addPlayer(player1);
-//        game.addPlayer(player2);
-//        game.addPlayer(player3);
-//
-//        game.setDeck(deck);
-//        game.setNumPlayers(3);
-//
-//        game.currentTurn=-1;
-//
-//        //Act
-//        int currentPlayerIndex = game.currentTurn%(3);
-//        var currentPlayer = game.getPlayers().get(currentPlayerIndex);
-//
-//        //Assert
-//        assertEquals(2, currentPlayerIndex);
-//        assertEquals(2, game.getPlayers().indexOf(currentPlayer));
-//    }
-
-
 }
