@@ -1,6 +1,5 @@
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Game {
 
@@ -9,17 +8,16 @@ public class Game {
     private RPlayer RPlayer = new RPlayer();
     boolean gameInProgress = true;
     private TopCard topCard = new TopCard();
-
-
-
-
     private int numPlayers;
     private int currentPlayer=0;
     public int turnDirection = 1;
     public int currentTurn = 0;
-    Scanner scanner = new Scanner(System.in);
+
 
     public Game(){
+    }
+    public Game(int numPlayers){
+        this.numPlayers = numPlayers;
     }
 
     public Deck getDeck() {
@@ -35,15 +33,12 @@ public class Game {
         RPlayers.add(RPlayer);}
 
     public void Play(Game game) {
-        System.out.println("Welcome to Uno!");
-        System.out.println("How many players?");
-        numPlayers=scanner.nextInt();
+
         gameInProgress = true;
         currentTurn = 0;
         turnDirection = 1;
-
         this.deck=game.getDeck();
-        arrangeStartingDeck(deck);                  //getting deck ready
+        arrangeStartingDeck(deck);    //getting deck ready
         for (int i = 0; i <numPlayers ; i++) {      //creating players with starting hands
             ArrayList<Card> hand = getStartingHand(deck);
             RPlayers.add(new RPlayer(hand));
@@ -54,6 +49,7 @@ public class Game {
         }
 
         while (gameInProgress){
+
             //this is making sure that we don't % a negative number
             if(currentTurn<=0){
                 currentTurn = currentTurn+ RPlayers.size();
@@ -61,11 +57,11 @@ public class Game {
             currentPlayer = currentTurn%(RPlayers.size());
             System.out.println("Current Player is Player Number" +currentPlayer);
             this.RPlayer = RPlayers.get(currentPlayer);
-            Card faceUp = topCard.getCard();
-            System.out.println("The top card is " + topCard.getCard().toString()+".");
+
+            System.out.println("The top card is " + topCard.toString());
             RPlayer.takeTurn(game);
             if(RPlayer.getHandSize()==0 ){
-                System.out.println("Player " + currentPlayer +"has won the game!");
+                System.out.println("Player " + currentPlayer +" has won the game!");
                 game.displayGameOver();
                 gameInProgress=false;
             }
@@ -93,6 +89,7 @@ public class Game {
 
     public void setTopCard(Card card, Colors declaredColor){
         topCard.setCard(card);
+
         if (declaredColor.toString().equalsIgnoreCase("wild")){
             Random random = new Random();
             int number = random.nextInt(100000)%4;
@@ -120,24 +117,41 @@ public class Game {
 
     public Boolean isPlayable (Card fromHand, TopCard topCard) {
         boolean playable = false;
-
-        if (fromHand.getFace().toString().equalsIgnoreCase(topCard.getCard().getFace().toString()) ||
-                fromHand.getColor().toString().equals(topCard.getDeclaredColor().toString()) ||
-                fromHand.getColor().toString().equalsIgnoreCase("wild")) {
-            playable = true;
-        }
+//        if (deck.isMember(fromHand)) {
+            if (fromHand.getFace().toString().equalsIgnoreCase(topCard.getCard().getFace().toString()) ||
+                    fromHand.getColor().toString().equals(topCard.getDeclaredColor().toString()) ||
+                    fromHand.getColor().toString().equalsIgnoreCase("wild")) {
+                playable = true;
+            }
+//        }
         return playable;
     }
 
-    public void playCard(Card card, Colors declaredColor){
-
+    public void playCard(Card card, Optional<Colors> declaredColor) {
+        //make sure things were passed correctly
+        System.out.println("Player " + currentPlayer + " played " + card.toString() + " on " + topCard.getCard().toString() + ".");
         deck.addCardToDiscardPile(card);
-        topCard.setCard(card);
-        topCard.setDeclaredColor(declaredColor);
-        System.out.println("Player " + currentPlayer +" played " + topCard.toString() + " on " +topCard.getCard().toString()+".");
-        if (hasAction(topCard.getCard())) {
-            executeCardAction(topCard.getCard(), this);
-        }
+        if (declaredColor.isPresent() == false) {
+            if (card.getColor().ordinal() != 5) {
+                topCard.setDeclaredColor(card.getColor());
+            } else {
+                topCard.setDeclaredColor(forcePickValidDeclaredColor());
+                topCard.setCard(card);
+                }
+            } else if (declaredColor.isPresent()) {
+                //check to make sure the declared color makes sense
+                if (isValidDeclaredColor(declaredColor) == false) {
+                    declaredColor = Optional.ofNullable(forcePickValidDeclaredColor());
+                }
+                topCard.setCard(card);
+                    topCard.setDeclaredColor(declaredColor.orElseThrow()); //this will never throw
+            }
+            if (RPlayer.getHandSize() != 0) {
+                if (hasAction(topCard.getCard())) {
+                    executeCardAction(topCard.getCard(), this);
+                }
+            }
+
     }
 
     public Boolean hasAction(Card card) {
@@ -162,7 +176,7 @@ public class Game {
                     currentTurn = currentTurn+ RPlayers.size();
                 }
                 var nextPlayerIndex = (currentTurn+turnDirection)% RPlayers.size();
-                RPlayers.get(nextPlayerIndex);
+                //RPlayers.get(nextPlayerIndex);
                 RPlayers.get(nextPlayerIndex).drawCard(this);
                 RPlayers.get(nextPlayerIndex).drawCard(this);
                 //this skips the next player
@@ -191,13 +205,37 @@ public class Game {
                 System.out.println("Player " +nextPlayerIndex+ " was skipped");
                 currentTurn = currentTurn+turnDirection;
             } else if (Faces.Reverse.equals(card.getFace())) {
-
                 turnDirection= turnDirection*(-1);
                 System.out.println("Turn order reversed");
             }
+    }
 
+    public Boolean isValidDeclaredColor(Optional<Colors> declaredColor){
+        boolean isValid = false;
+        Colors[] validColor = {Colors.Red, Colors.Green, Colors.Yellow,Colors.Blue};
+        for (Colors color: validColor) {
+            if(declaredColor.get().ordinal() == color.ordinal()) {
+                isValid = true;
+            }
+        }
+        return isValid;
+    }
+
+
+    public Colors forcePickValidDeclaredColor() {
+        //keeping game in here because I'm going to add code to choose the ideal
+        //color to declare based on the state of the game
+        ArrayList<Colors> randomColors = new ArrayList<>();
+        randomColors.add(Colors.Red);
+        randomColors.add(Colors.Blue);
+        randomColors.add(Colors.Green);
+        randomColors.add(Colors.Yellow);
+        Collections.shuffle(randomColors);
+        System.out.println("Invalid color declaration.  Random color chosen instead");
+        return randomColors.get(0);
 
     }
+
 
     public void yellUno(){
         System.out.println();
@@ -211,6 +249,7 @@ public class Game {
 
         System.out.println();
     }
+
     public void displayGameOver(){
         System.out.println();
         System.out.println(" d888b   .d8b.  .88b  d88. d88888b    .d88b.  db    db d88888b d8888b.\n" +

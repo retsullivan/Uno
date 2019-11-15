@@ -40,7 +40,6 @@ public class RPlayer implements Player{
             if(hand.size()==1){
                 game.yellUno();
             }
-
         }
 
         @Override
@@ -52,25 +51,50 @@ public class RPlayer implements Player{
 
         public void playCard(Card card, Game game) {
             Colors declaredcolor = declareColor(card, game);
-            game.playCard(card, declaredcolor);
             hand.remove(card);
+            game.playCard(card, java.util.Optional.ofNullable(declaredcolor));
         }
 
         public Colors declareColor(Card card, Game game) {
             //keeping game in here because I'm going to add code to choose the ideal
             //color to declare based on the state of the game
             var declaredColor = card.getColor();
+            ArrayList<Colors> randomColors = new ArrayList<>();
+            randomColors.add(Colors.Red);
+            randomColors.add(Colors.Blue);
+            randomColors.add(Colors.Green);
+            randomColors.add(Colors.Yellow);
+
+            boolean declaredColorinHand = false;
+            int numWildColorCardsInHand = 0;
+
             if (card.getColor().toString().equalsIgnoreCase("wild")){
-                ArrayList<Colors> randomColors = new ArrayList<>();
-                randomColors.add(Colors.Red);
-                randomColors.add(Colors.Blue);
-                randomColors.add(Colors.Green);
-                randomColors.add(Colors.Yellow);
-                Collections.shuffle(randomColors);
-                declaredColor = randomColors.get(0);
+                while (declaredColorinHand==false) {
+                    Collections.shuffle(randomColors);
+
+                    //this checks to make sure that we don't declare a color if it's not in our hand
+                    for (Card c:hand){
+                        if (card.getColor().ordinal() == randomColors.get(0).ordinal()){
+                            declaredColorinHand = true;
+                            declaredColor = card.getColor();
+                            break;
+                        }
+                        if(card.getColor().ordinal()==5){
+                            numWildColorCardsInHand++;
+                        }
+                    }
+                    if (numWildColorCardsInHand==hand.size()){
+                        Collections.shuffle(randomColors);
+                        declaredColorinHand = true;
+                        declaredColor = randomColors.get(0);
+                        break;
+                    }
+                }
             }
             return declaredColor;
         }
+
+
 
 }
 

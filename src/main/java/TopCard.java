@@ -26,4 +26,18 @@ public class TopCard {
     public void setDeclaredColor(Colors declaredColor) {
         this.declaredColor = declaredColor;
     }
+
+    @Override
+    public String toString(){
+        //Faces.Draw4, Colors.Blue is the fake card that "playedCard" is automatically
+        //set to at the beginning of a turn if that is the card that is returned,
+        // that means that the player was not able to play any card at all
+//        if (color.toString().equalsIgnoreCase("Blue")&&face.toString().equalsIgnoreCase("Draw4")){
+//            return "No card ";
+//        }else {
+
+        return this.getCard().toString() + ". The declared color is " + declaredColor.toString();
+        //}
+    }
+
 }

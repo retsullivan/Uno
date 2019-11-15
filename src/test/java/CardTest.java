@@ -44,13 +44,13 @@ public class CardTest {
         assertTrue(match);
     }
 
-    @Test
-    public void equals_returns_true_when_same_card(){
-        Card card1 = new Card(Faces.Reverse, Colors.Blue);
-        Card card2 = new Card(Faces.Reverse, Colors.Blue);
-
-        assertTrue(card.equals(card1,card2));
-    }
+//    @Test
+//    public void equals_returns_true_when_same_card(){
+//        Card card1 = new Card(Faces.Reverse, Colors.Blue);
+//        Card card2 = new Card(Faces.Reverse, Colors.Blue);
+//
+//        assertTrue(card.equals(card1,card2));
+//    }
 
 
 

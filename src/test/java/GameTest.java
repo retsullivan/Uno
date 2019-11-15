@@ -9,6 +9,7 @@ public class GameTest {
     RPlayer player = new RPlayer();
     Game game = new Game();
     ArrayList<Card> playerHand = new ArrayList<>();
+    Card card = new Card(Faces.One,Colors.Blue);
 
     @Test
     public void isPlayable_returns_true_when_color_matches(){
@@ -62,30 +63,24 @@ public class GameTest {
     }
 
     @Test
-    public void when_card_played_handSize_goes_down_ONE_and_discardPile_size_goes_up_One(){
+    public void when_card_played_discardPile_size_goes_up_One(){
         //arrange
         this.deck=deck;
         this.game=game;
 
-
-        deck.addCardToDiscardPile(new Card(Faces.Five, Colors.Blue));
         game.setDeck(deck);
-
-        playerHand.add(new Card(Faces.Draw4, Colors.Wild));
-        playerHand.add(new Card(Faces.Wild, Colors.Wild));
-
+        game.setTopCard(new Card(Faces.Five, Colors.Blue), Colors.Blue);
+        playerHand.add(new Card (Faces.Five, Colors.Red));
         player = new RPlayer(playerHand);
         game.addPlayer(player);
         game.setNumPlayers(1);
-
-        Card card = playerHand.get(0);
+        var discardPileSize = game.getDeck().getDiscardPile().size();
 
         //act
-        player.playCard(card, game);
+        player.takeTurn(game);
 
         //assert
-
-        assertEquals(2,game.getDeck().getDiscardPile().size());
+        assertEquals(discardPileSize+1,game.getDeck().getDiscardPile().size());
     }
 
     @Test
@@ -102,21 +97,25 @@ public class GameTest {
 
     @Test
     public void playCard_adds_card_to_Discard_Pile_and_sets_TopCard(){
-
         //arrange
         this.deck = deck;
         this.game = game;
-        Card card = new Card(Faces.Five, Colors.Red);
+        this.card = card;
 
-        //Act
+
+        game.setDeck(deck);
+        game.setTopCard(new Card(Faces.Six, Colors.Red), Colors.Red);
+        playerHand.add(new Card(Faces.Five, Colors.Red));
+        player = new RPlayer(playerHand);
         var discardPileSize = game.getDeck().getDiscardPile().size();
-        game.playCard(card, Colors.Red);
+        //Act
+        player.takeTurn(game);
 
         var newDiscardPileSize = game.getDeck().getDiscardPile().size();
         var topCard = game.getTopCard();
         //Assert
-        assertTrue(discardPileSize+1==newDiscardPileSize);
-        assertTrue(card.toString().equalsIgnoreCase(topCard.getCard().toString()));
+        assertEquals(discardPileSize+1,newDiscardPileSize);
+        assertTrue(card.equals(new Card(Faces.Five, Colors.Red), topCard.getCard()));
     }
 
     @Test
@@ -219,5 +218,108 @@ public class GameTest {
         //Assert
         assertEquals(-1,game.turnDirection);
     }
+
+    @Test
+    public void color_declaration_reset_correctly(){
+
+        this.game = game;
+        this.deck = deck;
+
+        game.setTopCard(new Card(Faces.Wild, Colors.Wild), Colors.Red);
+        game.currentTurn=1;
+        game.turnDirection=1;
+        game.setNumPlayers(2);
+
+        ArrayList<Card> playerHand1 = new ArrayList<>();
+        ArrayList<Card> playerHand2 = new ArrayList<>();
+
+        playerHand1.add(new Card(Faces.Two,Colors.Red));
+        playerHand2.add(new Card(Faces.Two,Colors.Blue));
+
+        RPlayer RPlayer1 = new RPlayer(playerHand1);
+        RPlayer RPlayer2 = new RPlayer(playerHand2);
+
+        RPlayer1.playCard(new Card(Faces.Two,Colors.Red), game);
+
+        assertTrue(game.isPlayable(new Card(Faces.Two,Colors.Blue), game.getTopCard()));
+
+    }
+
+    @Test
+    public void deck_count_remains_the_same_when_Cards_have_been_played (){
+        this.game = game;
+        this.deck = deck;
+
+        game.setTopCard(new Card(Faces.Wild, Colors.Wild), Colors.Red);
+        game.currentTurn=1;
+        game.turnDirection=1;
+        game.setNumPlayers(1);
+
+
+
+        ArrayList<Card> playerHand1 = new ArrayList<>();
+        ArrayList<Card> playerHand2 = new ArrayList<>();
+
+        game.setTopCard(new Card(Faces.Two,Colors.Blue), Colors.Blue);
+
+
+        RPlayer RPlayer1 = new RPlayer(game.getStartingHand(deck));
+        RPlayer RPlayer2 = new RPlayer(game.getStartingHand(deck));
+
+        RPlayer1.playCard(new Card(Faces.Two,Colors.Red), game);
+        RPlayer2.playCard(new Card(Faces.Two,Colors.Blue), game);
+
+        assertEquals(deck.allCardsInDeck.size()+2, deck.getDrawPile().size() +deck.getDiscardPile().size()+ RPlayer1.getHandSize() + RPlayer2.getHandSize());
+    }
+
+    @Test
+    public void play_card_protects_against_passing_invalid_color(){
+        this.deck=deck;
+        this.game=game;
+
+        game.setDeck(deck);
+        game.setTopCard(new Card(Faces.Five, Colors.Blue), Colors.Blue);
+        playerHand.add(new Card (Faces.Five, Colors.Red));
+        player = new RPlayer(playerHand);
+        game.addPlayer(player);
+        game.setNumPlayers(1);
+        boolean invalidColorFixed = false;
+
+        //act
+        game.playCard(new Card(Faces.Wild, Colors.Wild), java.util.Optional.of(Colors.Wild));
+
+        if(game.getTopCard().getDeclaredColor().ordinal()==1 ||
+            game.getTopCard().getDeclaredColor().ordinal()==2 ||
+            game.getTopCard().getDeclaredColor().ordinal()==3 ||
+            game.getTopCard().getDeclaredColor().ordinal()==4 ){
+                invalidColorFixed = true;
+        }
+        //assert
+        assertTrue(invalidColorFixed);
+    }
+
+    @Test
+    public void is_Valid_Declared_Color_Recognizes_Valid_color() {
+        this.deck = deck;
+        this.game = game;
+
+        game.setDeck(deck);
+        game.setTopCard(new Card(Faces.Five, Colors.Blue), Colors.Blue);
+        playerHand.add(new Card(Faces.Five, Colors.Red));
+        player = new RPlayer(playerHand);
+        game.addPlayer(player);
+        game.setNumPlayers(1);
+        game.currentTurn=0;
+        game.turnDirection=1;
+
+        //act
+        //game.playCard(new Card(Faces.Five, Colors.Red), java.util.Optional.of(Colors.Red));
+        boolean validColorRecognized = game.isValidDeclaredColor(java.util.Optional.of(Colors.Red));
+
+        //assert
+        assertTrue(validColorRecognized);
+    }
+
+
 
 }

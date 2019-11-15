@@ -5,6 +5,7 @@ public class Deck {
     private  ArrayList<Card> drawPile = new ArrayList<>();
     private  ArrayList<Card> discardPile = new ArrayList<>();
     private final Random random = new Random();
+    public ArrayList<Card> allCardsInDeck = new ArrayList<>();
 
     public Deck(){
         for (Colors color: Colors.values()){
@@ -22,6 +23,9 @@ public class Deck {
                     drawPile.add(new Card(face, color));
                 }
             }
+        }
+        for (Card card:drawPile){
+            allCardsInDeck.add(card);
         }
     }
 
@@ -52,6 +56,14 @@ public class Deck {
 
     public void addCardToDiscardPile (Card card){
         discardPile.add(card);
+    }
+
+    public Boolean isMember (Card card){
+        boolean cardInDeck = false;
+        if (allCardsInDeck.contains(card)){
+            cardInDeck = true;
+        }
+        return cardInDeck;
     }
 
 

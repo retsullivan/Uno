@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,7 +37,7 @@ public class PlayerTest {
         player.drawCard(game);
 
         //assert
-        assertTrue(startingSize-1 == game.getDeck().getDrawPile().size());
+        assertEquals(startingSize-1, game.getDeck().getDrawPile().size());
     }
 
     @Test
@@ -90,19 +91,21 @@ public class PlayerTest {
         //arrange
         this.deck = deck;
         this.game = game;
+        game.setDeck(deck);
 
-        Card card1 = new Card(Faces.Wild, Colors.Wild);
-        Card card2 = new Card(Faces.Five, Colors.Red);
+        Card card1 = new Card(Faces.Five, Colors.Red);
+        game.setTopCard(new Card(Faces.Five, Colors.Blue), Colors.Blue);
         playerHand.add(card1);
-        playerHand.add(card2);
         this.player = new RPlayer(playerHand);
+        var startingHandSize = player.getHandSize();
         game.addPlayer(player);
+        game.setNumPlayers(1);
         //Act
 
         player.playCard(card1, game);
 
         //Assert
-        assertEquals(1, player.getHandSize());
+        assertEquals(startingHandSize-1, player.getHandSize());
     }
 
     @Test
@@ -112,13 +115,17 @@ public class PlayerTest {
         this.game = game;
         this.player = player;
 
+        game.setTopCard(new Card(Faces.Three, Colors.Red), Colors.Red);
         Card card = new Card(Faces.Five, Colors.Red);
         playerHand.add(card);
         //Act
+        this.player = new RPlayer(playerHand);
+
+        Optional<Colors> color = Optional.ofNullable(player.declareColor(card, game));
+
         player.playCard(card, game);
-        var color = player.declareColor(card,game);
         //Assert
-        assertTrue(game.getTopCard().getDeclaredColor().toString().equalsIgnoreCase(color.toString()));
+        assertEquals(Colors.Red.ordinal(), color.get().ordinal());
     }
 
     //need unit test for declare color
