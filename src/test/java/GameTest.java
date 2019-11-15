@@ -269,7 +269,7 @@ public class GameTest {
         RPlayer1.playCard(new Card(Faces.Two,Colors.Red), game);
         RPlayer2.playCard(new Card(Faces.Two,Colors.Blue), game);
 
-        assertEquals(deck.allCardsInDeck.size()+2, deck.getDrawPile().size() +deck.getDiscardPile().size()+ RPlayer1.getHandSize() + RPlayer2.getHandSize());
+        assertEquals(deck.allCardsInDeck.size()+2, deck.getDrawPileSize() +deck.getDiscardPile().size()+ RPlayer1.getHandSize() + RPlayer2.getHandSize());
     }
 
     @Test
@@ -288,11 +288,11 @@ public class GameTest {
         //act
         game.playCard(new Card(Faces.Wild, Colors.Wild), java.util.Optional.of(Colors.Wild));
 
-        if(game.getTopCard().getDeclaredColor().ordinal()==1 ||
-            game.getTopCard().getDeclaredColor().ordinal()==2 ||
-            game.getTopCard().getDeclaredColor().ordinal()==3 ||
-            game.getTopCard().getDeclaredColor().ordinal()==4 ){
-                invalidColorFixed = true;
+        if(game.getTopCard().getDeclaredColor()==Colors.Red ||
+            game.getTopCard().getDeclaredColor()==Colors.Blue ||
+            game.getTopCard().getDeclaredColor()==Colors.Green ||
+            game.getTopCard().getDeclaredColor()==Colors.Yellow){
+            invalidColorFixed = true;
         }
         //assert
         assertTrue(invalidColorFixed);

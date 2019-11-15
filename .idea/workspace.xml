@@ -2,22 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15505e80-b873-443e-b7aa-b14c11264f1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/TimApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Deck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/RPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TopCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TopCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/DeckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DeckTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/GameTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PlayerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Card.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Deck.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Game.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/RPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/RPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TopCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TopCard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/CardTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/CardTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/DeckTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/DeckTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/GameTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/GameTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/PlayerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/PlayerTest.class" afterDir="false" />
     </list>
@@ -70,10 +66,19 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.GameTest">
+  <component name="RunManager" selected="JUnit.PlayerTest">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="App" />
       <module name="Uno" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DeckTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Uno" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DeckTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -87,21 +92,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameTest.is_Valid_Declared_Color_Recognizes_Valid_color" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameTest.isPlayable_returns_true_when_faces_match" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Uno" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="GameTest" />
-      <option name="METHOD_NAME" value="is_Valid_Declared_Color_Recognizes_Valid_color" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GameTest.play_card_protects_against_passing_invalid_color" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Uno" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="GameTest" />
-      <option name="METHOD_NAME" value="play_card_protects_against_passing_invalid_color" />
+      <option name="METHOD_NAME" value="isPlayable_returns_true_when_faces_match" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -118,11 +113,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GameTest" />
-        <item itemvalue="JUnit.GameTest.play_card_protects_against_passing_invalid_color" />
         <item itemvalue="JUnit.PlayerTest" />
+        <item itemvalue="JUnit.GameTest" />
+        <item itemvalue="JUnit.GameTest.isPlayable_returns_true_when_faces_match" />
+        <item itemvalue="JUnit.DeckTest" />
         <item itemvalue="Application.App" />
-        <item itemvalue="JUnit.GameTest.is_Valid_Declared_Color_Recognizes_Valid_color" />
       </list>
     </recent_temporary>
   </component>
@@ -179,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573764429092</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added optional return of declared color, validation tests for declared color and unit tests to make sure it worked.  All tests passing currently.">
+      <created>1573848522186</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1573848522186</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,36 +204,10 @@
     <MESSAGE value="fixed the fake card thing and skip" />
     <MESSAGE value="turn is void and tests pass" />
     <MESSAGE value="deleted unneeded classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="deleted unneeded classes" />
+    <MESSAGE value="added optional return of declared color, validation tests for declared color and unit tests to make sure it worked.  All tests passing currently." />
+    <option name="LAST_COMMIT_MESSAGE" value="added optional return of declared color, validation tests for declared color and unit tests to make sure it worked.  All tests passing currently." />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/RPlayer.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/RPlayer.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/GameTest.java</url>
-          <line>6</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/RPlayer.java</url>
-          <line>51</line>
-          <properties class="RPlayer" method="playCard">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="card" language="JAVA" />

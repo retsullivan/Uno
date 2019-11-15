@@ -5,6 +5,7 @@ public class Deck {
     private  ArrayList<Card> drawPile = new ArrayList<>();
     private  ArrayList<Card> discardPile = new ArrayList<>();
     private final Random random = new Random();
+
     public ArrayList<Card> allCardsInDeck = new ArrayList<>();
 
     public Deck(){
@@ -66,10 +67,14 @@ public class Deck {
         return cardInDeck;
     }
 
-
-    public ArrayList<Card> getDrawPile(){
+    //I had to make this private so people can't cheat
+    private ArrayList<Card> getDrawPile(){
         return drawPile;
     }
+    public int getDrawPileSize(){
+        return drawPile.size();
+    }
+
     public ArrayList<Card> getDiscardPile(){
         return discardPile;
     }
@@ -83,4 +88,7 @@ public class Deck {
         this.discardPile = discardPile;
     }
 
+    public void initilizeGame() {
+     setDrawPile(this.shuffle(this.getDrawPile()));
+    }
 }

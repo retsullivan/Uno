@@ -2,9 +2,9 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class Game {
-
-    private Deck deck = new Deck();
-    private ArrayList<RPlayer> RPlayers = new ArrayList<>();
+    //todo: instance variables should be private and utilize setters / getters to access externally
+    public Deck deck = new Deck();
+    private ArrayList<RPlayer> players = new ArrayList<>();
     private RPlayer RPlayer = new RPlayer();
     boolean gameInProgress = true;
     private TopCard topCard = new TopCard();
@@ -20,6 +20,7 @@ public class Game {
         this.numPlayers = numPlayers;
     }
 
+
     public Deck getDeck() {
         return deck;
     }
@@ -28,9 +29,9 @@ public class Game {
     }
     public TopCard getTopCard (){return topCard;}
     public void setNumPlayers(int numPlayers) {this.numPlayers = numPlayers;}
-    public ArrayList<RPlayer> getRPlayers() {return RPlayers;}
+    public ArrayList<RPlayer> getRPlayers() {return players;}
     public void addPlayer(RPlayer RPlayer) {
-        RPlayers.add(RPlayer);}
+        players.add(RPlayer);}
 
     public void Play(Game game) {
 
@@ -41,7 +42,7 @@ public class Game {
         arrangeStartingDeck(deck);    //getting deck ready
         for (int i = 0; i <numPlayers ; i++) {      //creating players with starting hands
             ArrayList<Card> hand = getStartingHand(deck);
-            RPlayers.add(new RPlayer(hand));
+            players.add(new RPlayer(hand));
         }
 
         if (hasAction(topCard.getCard())){
@@ -52,11 +53,11 @@ public class Game {
 
             //this is making sure that we don't % a negative number
             if(currentTurn<=0){
-                currentTurn = currentTurn+ RPlayers.size();
+                currentTurn = currentTurn+ players.size();
             }
-            currentPlayer = currentTurn%(RPlayers.size());
+            currentPlayer = currentTurn%(players.size());
             System.out.println("Current Player is Player Number" +currentPlayer);
-            this.RPlayer = RPlayers.get(currentPlayer);
+            this.RPlayer = players.get(currentPlayer);
 
             System.out.println("The top card is " + topCard.toString());
             RPlayer.takeTurn(game);
@@ -81,7 +82,7 @@ public class Game {
 
     public void arrangeStartingDeck(Deck deck){
         this.deck=deck;
-        deck.setDrawPile(deck.shuffle(deck.getDrawPile()));
+        deck.initilizeGame();
         Card firstCard = deck.draw();
         setTopCard(firstCard, firstCard.getColor());
         deck.addCardToDiscardPile(topCard.getCard());
@@ -173,25 +174,25 @@ public class Game {
     public void executeCardAction(Card card,Game game){
             if (Faces.Draw2.equals(card.getFace())) {
                 if(currentTurn<=0){
-                    currentTurn = currentTurn+ RPlayers.size();
+                    currentTurn = currentTurn+ players.size();
                 }
-                var nextPlayerIndex = (currentTurn+turnDirection)% RPlayers.size();
+                var nextPlayerIndex = (currentTurn+turnDirection)% players.size();
                 //RPlayers.get(nextPlayerIndex);
-                RPlayers.get(nextPlayerIndex).drawCard(this);
-                RPlayers.get(nextPlayerIndex).drawCard(this);
+                players.get(nextPlayerIndex).drawCard(this);
+                players.get(nextPlayerIndex).drawCard(this);
                 //this skips the next player
                 currentTurn = currentTurn + turnDirection;
                 System.out.println("Player " +nextPlayerIndex+ " drew 2 and skipped their turn.");
             } else if (Faces.Draw4.equals(card.getFace())) {
                 if(currentTurn<=0){
-                    currentTurn = currentTurn+ RPlayers.size();
+                    currentTurn = currentTurn+ players.size();
                 }
-                var nextPlayerIndex = (currentTurn+turnDirection)% RPlayers.size();
+                var nextPlayerIndex = (currentTurn+turnDirection)% players.size();
 //                RPlayers.get(nextPlayerIndex);
-                RPlayers.get(nextPlayerIndex).drawCard(this);
-                RPlayers.get(nextPlayerIndex).drawCard(this);
-                RPlayers.get(nextPlayerIndex).drawCard(this);
-                RPlayers.get(nextPlayerIndex).drawCard(this);
+                players.get(nextPlayerIndex).drawCard(this);
+                players.get(nextPlayerIndex).drawCard(this);
+                players.get(nextPlayerIndex).drawCard(this);
+                players.get(nextPlayerIndex).drawCard(this);
                 //player.drawCard(game);
                    //this skips the next player
                 currentTurn = currentTurn + turnDirection;
@@ -199,9 +200,9 @@ public class Game {
 
             } else if (Faces.Skip.equals(card.getFace())) {
                 if(currentTurn<=0){
-                    currentTurn = currentTurn+ RPlayers.size();
+                    currentTurn = currentTurn+ players.size();
                 }
-                var nextPlayerIndex = (currentTurn+turnDirection)%RPlayers.size();
+                var nextPlayerIndex = (currentTurn+turnDirection)%players.size();
                 System.out.println("Player " +nextPlayerIndex+ " was skipped");
                 currentTurn = currentTurn+turnDirection;
             } else if (Faces.Reverse.equals(card.getFace())) {

@@ -68,18 +68,18 @@ public class RPlayer implements Player{
             boolean declaredColorinHand = false;
             int numWildColorCardsInHand = 0;
 
-            if (card.getColor().toString().equalsIgnoreCase("wild")){
+            if (card.getColor()==Colors.Wild){
                 while (declaredColorinHand==false) {
                     Collections.shuffle(randomColors);
 
                     //this checks to make sure that we don't declare a color if it's not in our hand
                     for (Card c:hand){
-                        if (card.getColor().ordinal() == randomColors.get(0).ordinal()){
+                        if (card.getColor() == randomColors.get(0)){
                             declaredColorinHand = true;
                             declaredColor = card.getColor();
                             break;
                         }
-                        if(card.getColor().ordinal()==5){
+                        if(card.getColor()==Colors.Wild){
                             numWildColorCardsInHand++;
                         }
                     }
@@ -87,7 +87,6 @@ public class RPlayer implements Player{
                         Collections.shuffle(randomColors);
                         declaredColorinHand = true;
                         declaredColor = randomColors.get(0);
-                        break;
                     }
                 }
             }
@@ -99,24 +98,4 @@ public class RPlayer implements Player{
 }
 
 
-//ideas for picking the best color to declare
-//pic the one that the opponents are most likely to not have?
-//            HashMap<Colors, Integer> discardColorCount = new HashMap<>();
-//            for (Card discard : game.getDeck().getDiscardPile()) {
-//                if (discard.getColor().toString().equalsIgnoreCase("wild") == false) {
-//                    if (discardColorCount.containsKey(discard.getColor())) {
-//                        discardColorCount.put(discard.getColor(), discardColorCount.get(discard.getColor()) + 1);
-//                    } else {
-//                        discardColorCount.put(card.getColor(), 1);
-//                    }
-//                }
-//            }
 
-
-
-
-//            for (Colors color : discardColorCount.keySet()) {
-//                if (discardColorCount.get(color) > discardColorCount.get(declaredColor)) {
-//                    declaredColor = color;
-//                }
-//            }
