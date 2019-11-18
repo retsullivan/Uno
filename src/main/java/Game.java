@@ -134,13 +134,11 @@ public class Game implements IGame{
         this.topCard = topCard;
         Card fromHand = card;
         boolean playable = false;
-//        if (deck.isMember(fromHand)) {
             if (fromHand.getFace().toString().equalsIgnoreCase(topCard.getCard().getFace().toString()) ||
                     fromHand.getColor().toString().equals(topCard.getDeclaredColor().toString()) ||
                     fromHand.getColor().toString().equalsIgnoreCase("wild")) {
                 playable = true;
             }
-//        }
         return playable;
     }
 
@@ -157,19 +155,19 @@ public class Game implements IGame{
                 topCard.setDeclaredColor(forcePickValidDeclaredColor());
                 topCard.setCard(card);
                 }
-            } else if (declaredColor.isPresent()) {
-                //check to make sure the declared color makes sense
-                if (isValidDeclaredColor(declaredColor) == false) {
-                    declaredColor = Optional.ofNullable(forcePickValidDeclaredColor());
-                }
-                topCard.setCard(card);
-                    topCard.setDeclaredColor(declaredColor.orElseThrow()); //this will never throw
+        } else if (declaredColor.isPresent()) {
+            //check to make sure the declared color makes sense
+            if (isValidDeclaredColor(declaredColor) == false) {
+                declaredColor = Optional.ofNullable(forcePickValidDeclaredColor());
             }
-            if (player.getHandSize() != 0) {
-                if (hasAction(topCard.getCard())) {
-                    executeCardAction(topCard.getCard(), this);
-                }
+            topCard.setCard(card);
+                topCard.setDeclaredColor(declaredColor.orElseThrow()); //this will never throw
+        }
+        if (player.getHandSize() != 0) {
+            if (hasAction(topCard.getCard())) {
+                executeCardAction(topCard.getCard(), this);
             }
+        }
 
     }
 
