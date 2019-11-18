@@ -1,7 +1,7 @@
-public interface Player {
+public interface IPlayer {
 
     public int getHandSize();
     public void takeTurn(Game game);
-    public Card drawCard (Game game);
+    public Card draw(Game game);
 
 }

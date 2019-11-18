@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class RPlayer implements Player{
+public class RPlayer implements IPlayer {
 
     private ArrayList<Card> hand = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class RPlayer implements Player{
             boolean cardPlayed = false;
             for (Card card : hand) {
                 if (cardPlayed == false) {
-                    if (game.isPlayable(card, game.getTopCard())) {
+                    if (game.isPlayable(card)) {
                         playCard(card, game);
                         cardPlayed = true;
                         break;
@@ -32,8 +32,8 @@ public class RPlayer implements Player{
             }
             //if no cards were playable, draw a card and play if it you can
             if (cardPlayed == false) {
-                Card card = drawCard(game);
-                if (game.isPlayable(card, game.getTopCard())) {
+                Card card = draw(game);
+                if (game.isPlayable(card)) {
                     playCard(card, game);
                 }
             }
@@ -43,8 +43,8 @@ public class RPlayer implements Player{
         }
 
         @Override
-        public Card drawCard(Game game) {
-            Card card = game.getDeck().draw();
+        public Card draw(Game game) {
+            Card card = game.draw();
             hand.add(card);
             return card;
         }

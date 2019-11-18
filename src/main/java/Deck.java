@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Deck {
+public class Deck implements IDeck{
 
     private  ArrayList<Card> drawPile = new ArrayList<>();
     private  ArrayList<Card> discardPile = new ArrayList<>();
@@ -53,6 +53,10 @@ public class Deck {
         return cards;
     }
 
+    public ArrayList<Card> getDiscardPile(ArrayList<Card> cards){
+        return discardPile;
+    }
+
 
 
     public void addCardToDiscardPile (Card card){
@@ -71,10 +75,13 @@ public class Deck {
     private ArrayList<Card> getDrawPile(){
         return drawPile;
     }
+
+    @Override
     public int getDrawPileSize(){
         return drawPile.size();
     }
 
+    @Override
     public ArrayList<Card> getDiscardPile(){
         return discardPile;
     }

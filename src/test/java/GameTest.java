@@ -15,9 +15,9 @@ public class GameTest {
     public void isPlayable_returns_true_when_color_matches(){
         //arrange
         Card card1 = new Card(Faces.Four, Colors.Red);
-        TopCard card2 = new TopCard(new Card(Faces.Six, Colors.Red), Colors.Red);
+        game.setTopCard(new Card(Faces.Six, Colors.Red), Colors.Red);
         //act
-        boolean isPlayable = game.isPlayable(card1, card2);
+        boolean isPlayable = game.isPlayable(card1);
         //assert
         assertTrue(isPlayable);
     }
@@ -26,11 +26,11 @@ public class GameTest {
     public void isPlayable_returns_true_when_faces_match(){
         //arrange
         Card card1 = new Card(Faces.Six, Colors.Green);
-        TopCard card2 = new TopCard(new Card(Faces.Six, Colors.Red), Colors.Red);
+        game.setTopCard(new Card(Faces.Six, Colors.Red), Colors.Red);
         playerHand.add(card1);
 
         //act
-        boolean isPlayable = game.isPlayable(card1, card2);
+        boolean isPlayable = game.isPlayable(card1);
         //assert
         assertTrue(isPlayable);
     }
@@ -39,10 +39,9 @@ public class GameTest {
     public void isPlayable_returns_false_when_Faces_and_color_different(){
         //arrange
         Card card1 = new Card(Faces.Six, Colors.Green);
-        TopCard card2 = new TopCard(new Card(Faces.Five, Colors.Red), Colors.Red);
-
+        game.setTopCard(new Card(Faces.Five, Colors.Red), Colors.Red);
         //act
-        boolean isPlayable = game.isPlayable(card1, card2);
+        boolean isPlayable = game.isPlayable(card1);
         //assert
         assertFalse(isPlayable);
     }
@@ -52,12 +51,12 @@ public class GameTest {
         //arrange
 
         Card card1 = new Card(Faces.Wild, Colors.Wild);
-        TopCard card2 = new TopCard(new Card(Faces.Five, Colors.Red), Colors.Red);
+        game.setTopCard(new Card(Faces.Five, Colors.Red), Colors.Red);
         playerHand.add(card1);
 
 
         //act
-        boolean isPlayable = game.isPlayable(card1, card2);
+        boolean isPlayable = game.isPlayable(card1);
         //assert
         assertTrue(isPlayable);
     }
@@ -241,7 +240,7 @@ public class GameTest {
 
         RPlayer1.playCard(new Card(Faces.Two,Colors.Red), game);
 
-        assertTrue(game.isPlayable(new Card(Faces.Two,Colors.Blue), game.getTopCard()));
+        assertTrue(game.isPlayable(new Card(Faces.Two,Colors.Blue)));
 
     }
 

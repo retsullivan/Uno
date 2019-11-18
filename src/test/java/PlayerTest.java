@@ -34,7 +34,7 @@ public class PlayerTest {
         int startingSize = game.getDeck().getDrawPileSize();
 
         //act
-        player.drawCard(game);
+        player.draw(game);
 
         //assert
         assertEquals(startingSize-1, game.getDeck().getDrawPileSize());
@@ -47,7 +47,7 @@ public class PlayerTest {
         this.player = new RPlayer(playerHand);
         //Act
 
-        player.drawCard(game);
+        player.draw(game);
 
         //assert
         assertEquals(1,playerHand.size());
@@ -65,7 +65,7 @@ public class PlayerTest {
         game.addPlayer(player);
         //Act
 
-        Card card3 = player.drawCard(game);
+        Card card3 = player.draw(game);
 
         //assert
         assertEquals(3,playerHand.size());
