@@ -366,6 +366,4 @@ public class AIGame implements IGame{
         System.out.println("Game Over");
         return winningPlayer;
     }
-
-
 }

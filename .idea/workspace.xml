@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f3cadd9-f27d-4cc1-999b-1859621e2529" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/improving/Logger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/AIGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/AIGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/AIPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/IPlayerInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/IPlayerInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/RPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/RPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/AIPlayerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AIPlayerTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/AIPlayerTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/AIPlayerTests.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
