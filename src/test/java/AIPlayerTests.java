@@ -186,6 +186,45 @@ public class AIPlayerTests {
         assertEquals( 0,orderedFaces.indexOf(Faces.Two));
     }
 
+    @Test
+    public void discard_count_has_correct_number_of_entries(){
+        this.game = arrangeCardCountTestConditions(game);
+
+        int numDiscardCardCountEntries = player.getDiscardCardCount(game).size();
+        assertEquals( 3, numDiscardCardCountEntries);
+    }
+
+    @Test
+    public void discard_count_correct(){
+        this.game = arrangeCardCountTestConditions(game);
+
+        Card card1 = new Card(Faces.Wild,Colors.Wild);
+        Card card2 = new Card(Faces.Two, Colors.Blue);
+        Card card3 = new Card(Faces.Five, Colors.Red);
+
+        Map<String, Long> discardCardCount = player.getDiscardCardCount(game);
+
+        assertEquals( 3,discardCardCount.get(card1.toString())); //need to define equals or something
+        assertEquals( 2,discardCardCount.get(card3.toString()));
+        assertEquals( 1,discardCardCount.get(card2.toString()));
+    }
+
+    @Test
+    public void discard_pile_card_counts_ranked_correctly(){
+        this.game = arrangeCardCountTestConditions(game);
+
+        Card card1 = new Card(Faces.Wild,Colors.Wild);
+        Card card2 = new Card(Faces.Two, Colors.Blue);
+        Card card3 = new Card(Faces.Five, Colors.Red);
+
+        Map<String, Long> discardCardCount = player.getRankedCards(game);
+        List<String> rankedCardTally = discardCardCount.keySet().stream().collect(Collectors.toList());
+
+        assertEquals( 2,rankedCardTally.indexOf(card1.toString())); //need to define equals or something
+        assertEquals( 1,rankedCardTally.indexOf(card3.toString()));
+        assertEquals( 0,rankedCardTally.indexOf(card2.toString()));
+    }
+
 
     public Game arrangColorCountTestConditions(Game game){
         this.deck = deck;
@@ -236,8 +275,9 @@ public class AIPlayerTests {
 
 
         return game;
-
     }
+
+
 
 
 }

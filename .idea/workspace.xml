@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15505e80-b873-443e-b7aa-b14c11264f1b" name="Default Changelist" comment="">
+    <list default="true" id="7f3cadd9-f27d-4cc1-999b-1859621e2529" name="Default Changelist" comment="Merge branch 'master' into MondayImplementingNewInterfaces&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
       <change beforePath="$PROJECT_DIR$/src/main/java/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AIPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/AIPlayerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AIPlayerTests.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

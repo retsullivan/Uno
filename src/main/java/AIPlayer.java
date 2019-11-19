@@ -160,14 +160,47 @@ public class AIPlayer implements IPlayer {
         return  rankedFaces(game);
     }
 
-//    private Map<Card, Long> discardCardCount(Game game) {
-//        List<String> cardNames = game.getDeck().getDiscardPile().stream()
-//                                    .collect(Collectors.toList());
-//
-//        Map<String, Long> discardCardCount =
-//
-//        return discardCardCount;
-//    }
+    private Map<String, Long> discardCardCount(Game game) {
+        List<String> discardCards = game.getDeck().getDiscardPile().stream()
+                .map(card ->card.toString())
+                .collect(Collectors.toList());
+        Map<String, Long> discardCardCount = discardCards.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        ;
+        return discardCardCount;
+    }
+
+    public Map<String, Long> getDiscardCardCount(Game game){return  discardCardCount(game);}
+
+    private Map<String, Long> rankedCards(Game game){
+        Map<String, Long> cardTally = discardCardCount(game);
+        Map<String, Long> rankedCards= cardTally.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(toMap(Map.Entry::getKey,Map.Entry::getValue,
+                        (e1,e2)->e1, LinkedHashMap::new));
+        return rankedCards;
+    }
+
+    public Map<String, Long> getRankedCards(Game game){return  rankedCards(game);}
+
+    private ArrayList<Card> playableCards(ArrayList<Card> hand, Game game){
+        this.hand = hand;
+        ArrayList<Card> playableCards = new ArrayList<>();
+        for (Card card:hand){
+            if(game.isPlayable(card)){
+                playableCards.add(card);
+            }
+        }
+        return playableCards;
+    }
+
+    public ArrayList<Card> getPlayableCards(Game game){
+        return playableCards(hand,game);
+    }
+
+
+
+
 
 
 //        public Colors optimalColor(Game game) {
