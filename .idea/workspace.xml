@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="15505e80-b873-443e-b7aa-b14c11264f1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/AIPlayerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AIPlayerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/AIPlayerTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/AIPlayerTests.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,14 +56,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.App">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="App" />
-      <module name="Uno" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.GameTest">
     <configuration name="AIPlayerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Uno" />
       <option name="PACKAGE_NAME" value="" />
@@ -90,6 +84,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Uno" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GameTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PlayerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Uno" />
       <option name="PACKAGE_NAME" value="" />
@@ -101,11 +104,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.GameTest" />
         <item itemvalue="JUnit.AIPlayerTests" />
         <item itemvalue="JUnit.CardTest" />
-        <item itemvalue="JUnit.PlayerTest" />
         <item itemvalue="JUnit.DeckTest" />
+        <item itemvalue="JUnit.PlayerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -218,6 +221,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/AIPlayer.java</url>
           <line>151</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Deck.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
