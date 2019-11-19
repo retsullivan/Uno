@@ -54,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.AIPlayerTests">
+  <component name="RunManager" selected="JUnit.GameTest">
     <configuration name="AIPlayerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Uno" />
       <option name="PACKAGE_NAME" value="" />
@@ -102,10 +102,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GameTest" />
         <item itemvalue="JUnit.AIPlayerTests" />
         <item itemvalue="JUnit.CardTest" />
         <item itemvalue="JUnit.DeckTest" />
-        <item itemvalue="JUnit.GameTest" />
         <item itemvalue="JUnit.PlayerTest" />
       </list>
     </recent_temporary>

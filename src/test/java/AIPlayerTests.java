@@ -16,10 +16,6 @@ public class AIPlayerTests {
     ArrayList<Card> playerHand = new ArrayList<>();
     AIPlayer player = new AIPlayer();
     Game game = new Game();
-    //Card card = new Card();
-
-
-
 
     @Test
     public void getHandSize_returns_correct_HandSize(){
