@@ -226,10 +226,6 @@ public class AIPlayerTests {
         assertEquals( 0,rankedCardTally.indexOf(card2.toString()));
     }
 
-    @Test
-    public void card_to_String_working(){
-
-    }
 
     public Game arrangeColorCountTestConditions(Game game){
         this.deck = deck;

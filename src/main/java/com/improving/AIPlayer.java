@@ -9,9 +9,10 @@ import static java.util.stream.Collectors.toMap;
 public class AIPlayer implements IPlayer {
 
     private ArrayList<Card> hand = new ArrayList<>();
-    //private com.improving.Card card = new com.improving.Card();
-    public AIPlayer() {    }
+    private String name = "Smart Player";
 
+
+    public AIPlayer() {    }
     public AIPlayer(ArrayList<Card> hand) {
         this.hand = hand;
     }
@@ -22,11 +23,15 @@ public class AIPlayer implements IPlayer {
     }
 
     @Override
+    public String getName(){
+        this.name = name;
+        return name;
+    }
+
+    @Override
     public void takeTurn(IGame game) {
-
         boolean cardPlayed = false;
-
-        if(optimalCardFromHand(game)!= null && game.isPlayable(optimalCardFromHand(game))){
+        if(optimalCardFromHand(game)!=null && game.isPlayable(optimalCardFromHand(game))){
             Card card = optimalCardFromHand(game);
             playCard(card, game);
             cardPlayed = true;
@@ -38,9 +43,6 @@ public class AIPlayer implements IPlayer {
                 }
             }
         }
-
-
-
         //if no cards were playable, draw a card and play if it you can
         if (cardPlayed == false) {
             Card card = draw(game);
@@ -53,14 +55,12 @@ public class AIPlayer implements IPlayer {
         }
     }
 
-
     @Override
     public Card draw(IGame game) {
         Card card = game.draw();
         hand.add(card);
         return card;
     }
-
 
     public void playCard(Card card, IGame game) {
         Colors declaredcolor = card.getColor();
@@ -252,7 +252,6 @@ public class AIPlayer implements IPlayer {
         List<Colors> colors = new ArrayList<>(rankedColors.keySet());
         Colors optimizedColor = null;
 
-
         for (int i=colors.size()-1;i>=0;i--){  //since the comparator spit it out in ascending order
             for (Card card:this.hand) {
                 if(!hasAction(card)&&card.getColor() == colors.get(i)){ //this may need to be less strict
@@ -282,26 +281,7 @@ public class AIPlayer implements IPlayer {
         }
         return optimizedFace;
     }
-
-//    public com.improving.Card getMostCommonCardInDiscardPile(com.improving.IGame game) {
-//        //this checks to see if you have a card in your hand that is the same color as the one
-//        //that has been played most often in the game
-//        Map<String, Long> rankedCards = getRankedCards(game);
-//        List<String> cardNames = new ArrayList<>(rankedCards.keySet());
-//        com.improving.Card optimizedCard = new com.improving.Card();
-//
-//        for (int i =cardNames.size()-1;i>=0;i--){
-//            for (com.improving.Card card:this.hand) {
-//                if(!hasAction(card)&& card.toString().equalsIgnoreCase(cardNames.get(i))){ //this may need to be less strict
-//                    optimizedCard = card;
-//                    return optimizedCard;
-//                }
-//            }
-//        }
-//        return optimizedCard;
-//    }
-
-
+    // TODO: need to test this fully
     private Card optimalCardFromHand(IGame game) {
 
         if(useActionCard(game)){
@@ -355,7 +335,6 @@ public class AIPlayer implements IPlayer {
         }else {
             return false;
         }
-
     }
     public boolean equalCards(Card card1, Card card2){
         Boolean isEqual = false;
@@ -381,4 +360,25 @@ public class AIPlayer implements IPlayer {
     }
 
 }
+
+
+
+
+//    public com.improving.Card getMostCommonCardInDiscardPile(com.improving.IGame game) {
+//        //this checks to see if you have a card in your hand that is the same color as the one
+//        //that has been played most often in the game
+//        Map<String, Long> rankedCards = getRankedCards(game);
+//        List<String> cardNames = new ArrayList<>(rankedCards.keySet());
+//        com.improving.Card optimizedCard = new com.improving.Card();
+//
+//        for (int i =cardNames.size()-1;i>=0;i--){
+//            for (com.improving.Card card:this.hand) {
+//                if(!hasAction(card)&& card.toString().equalsIgnoreCase(cardNames.get(i))){ //this may need to be less strict
+//                    optimizedCard = card;
+//                    return optimizedCard;
+//                }
+//            }
+//        }
+//        return optimizedCard;
+//    }
 

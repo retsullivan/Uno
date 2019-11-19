@@ -13,7 +13,7 @@ public class AIGame implements IGame{
     private int currentPlayer=0;
     public int turnDirection = 1;
     public int currentTurn = 0;
-    private Map<IPlayer, Integer> opposingPlayerHandSizes= new HashMap<>();
+    public IPlayer winningPlayer = null;
 
 
     public AIGame(){
@@ -63,14 +63,16 @@ public class AIGame implements IGame{
                 currentTurn = currentTurn+ players.size();
             }
             currentPlayer = currentTurn%(players.size());
-            System.out.println("Current Player is Player Number" +currentPlayer);
+
             this.player = players.get(currentPlayer);
+            System.out.println("Current Player is " +player.getName());
 
             System.out.println("The top card is " + topCard.toString());
             player.takeTurn(this);
             if(player.handSize()==0 ){
-                System.out.println("Player " + currentPlayer +" has won the game!");
+                System.out.println("Player " + player.getName() +" has won the game!");
                 this.displayGameOver();
+                winningPlayer = this.player;
                 gameInProgress=false;
             }
 
@@ -105,7 +107,7 @@ public class AIGame implements IGame{
     }
     public IPlayerInfo getNextPlayer(){
         if(currentTurn<=0){
-            currentTurn = currentTurn+ players.size();
+            currentTurn = currentTurn+players.size();
         }
         var nextPlayerIndex = (currentTurn+turnDirection)% players.size();
         IPlayerInfo nextPLayer = players.get(nextPlayerIndex);
@@ -121,14 +123,14 @@ public class AIGame implements IGame{
 
     }
     public IPlayerInfo getNextNextPlayer(){
-        if(currentTurn<=0){
-            currentTurn = currentTurn+ 5*players.size();
+        if(currentTurn<=1){
+            currentTurn += 5*players.size(); //should I add more for here
         }
-        var nextPlayerIndex = (currentTurn+2*turnDirection)% players.size();
-        IPlayerInfo nextPLayer = players.get(nextPlayerIndex);
-        return nextPLayer;
-
+        var nextNextPlayerIndex = (currentTurn+2*turnDirection)%players.size();
+        IPlayerInfo nextNextPLayer = players.get(nextNextPlayerIndex);
+        return nextNextPLayer;
     }
+
     public IDeck getDeckInfo(){
         IDeck deckInfo = this.deck;
         return deckInfo;
@@ -180,7 +182,7 @@ public class AIGame implements IGame{
     public void playCard(Card card, Optional<Colors> color) {
         //make sure things were passed correctly
         Optional<Colors> declaredColor = color;
-        System.out.println("Player " + currentPlayer + " played " + card.toString() + " on " + topCard.getCard().toString() + ".");
+        System.out.println(this.player.getName()+ " played " + card.toString() + " on " + topCard.getCard().toString() + ".");
         deck.addCardToDiscardPile(card);
         if (declaredColor.isPresent() == false) {
             if (card.getColor().ordinal() != 5) {
@@ -232,7 +234,8 @@ public class AIGame implements IGame{
             players.get(nextPlayerIndex).draw(this);
             //this skips the next player
             currentTurn = currentTurn + turnDirection;
-            System.out.println("Player " +nextPlayerIndex+ " drew 2 and skipped their turn.");
+            System.out.println(players.get(nextPlayerIndex).getName()
+                    +" drew 2 and skipped their turn.");
         } else if (Faces.Draw4.equals(card.getFace())) {
             if(currentTurn<=0){
                 currentTurn = currentTurn+ players.size();
@@ -246,14 +249,14 @@ public class AIGame implements IGame{
             //player.drawCard(game);
             //this skips the next player
             currentTurn = currentTurn + turnDirection;
-            System.out.println("Player " +nextPlayerIndex+ " drew 4 and skipped their turn.");
+            System.out.println(players.get(nextPlayerIndex).getName()+ " drew 4 and skipped their turn.");
 
         } else if (Faces.Skip.equals(card.getFace())) {
             if(currentTurn<=0){
                 currentTurn = currentTurn+ players.size();
             }
             var nextPlayerIndex = (currentTurn+turnDirection)%players.size();
-            System.out.println("Player " +nextPlayerIndex+ " was skipped");
+            System.out.println(players.get(nextPlayerIndex).getName()+ " was skipped");
             currentTurn = currentTurn+turnDirection;
         } else if (Faces.Reverse.equals(card.getFace())) {
             turnDirection= turnDirection*(-1);
@@ -289,7 +292,6 @@ public class AIGame implements IGame{
 
 
 
-
     public void displayGameOver(){
         System.out.println();
         System.out.println(" d888b   .d8b.  .88b  d88. d88888b    .d88b.  db    db d88888b d8888b.\n" +
@@ -299,6 +301,70 @@ public class AIGame implements IGame{
                 "88. ~8~ 88   88 88  88  88 88.       `8b  d8'  `8bd8'  88.     88 `88.\n" +
                 " Y888P  YP   YP YP  YP  YP Y88888P    `Y88P'     YP    Y88888P 88   YD");
         System.out.println();
+    }
+
+    public IPlayer playGameReturnWinner(int numPlayers) {
+        gameInProgress = true;
+        currentTurn = 0;
+        turnDirection = 1;
+        this.winningPlayer = null;
+        players.clear();
+        this.deck = new Deck();
+        arrangeStartingDeck(deck);    //getting deck ready
+
+        for (int i = 0; i <numPlayers ; i++) {      //creating players with starting hands
+            ArrayList<Card> hand = getStartingHand(deck);
+            if (i==numPlayers-1) {
+                players.add(new AIPlayer(hand));
+            } else{
+                players.add(new RPlayer(hand));
+            }
+        }
+
+        if (hasAction(topCard.getCard())){
+            executeCardAction(topCard.getCard(),this);
+        }
+
+        while (gameInProgress){
+
+            //this is making sure that we don't % a negative number
+            if(currentTurn<=0){
+                currentTurn = currentTurn+ players.size();
+            }
+            currentPlayer = currentTurn%(players.size());
+
+            this.player = players.get(currentPlayer);
+            System.out.println("Current Player is " +player.getName());
+
+            System.out.println("The top card is " + topCard.toString());
+            player.takeTurn(this);
+            if(player.handSize()==0 ){
+                System.out.println("Player " + this.player.getName() +" has won the game!");
+                this.displayGameOver();
+                winningPlayer = this.player;
+                gameInProgress=false;
+            }
+            //do this after every turn
+            //turn direction will go back and forth
+            //need to extract this into a method???
+
+            currentTurn = currentTurn + turnDirection;
+            // TODO: need to extract this into a method that runs any time a card is drawn maybe?
+            if (deck.getDiscardPile().size()+deck.getDrawPileSize()==0){
+                System.out.println("Game ended because deck was empty");
+                gameInProgress=false;
+                System.out.println("");
+                int minHandSize = this.player.handSize();
+                winningPlayer = this.player;
+                for (IPlayer player:players){
+                    if (player.handSize()<minHandSize) {
+                        winningPlayer = this.player;
+                    }
+                }
+            }
+        }
+        System.out.println("Game Over");
+        return winningPlayer;
     }
 
 

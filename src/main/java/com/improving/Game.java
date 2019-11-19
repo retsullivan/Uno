@@ -1,5 +1,7 @@
 package com.improving;
 
+import org.testng.log4testng.Logger;
+
 import java.util.*;
 
 public class Game implements IGame{
@@ -15,6 +17,12 @@ public class Game implements IGame{
     public int currentTurn = 0;
     private Map<IPlayer, Integer> opposingPlayerHandSizes= new HashMap<>();
 
+    private Logger logger;
+    private IPlayer winningPlayer = null;
+
+    public IPlayer getWinningPlayer() {
+        return winningPlayer;
+    }
 
     public Game(){
     }
@@ -45,6 +53,7 @@ public class Game implements IGame{
         for (int i = 0; i <numPlayers ; i++) {      //creating players with starting hands
             ArrayList<Card> hand = getStartingHand(deck);
             players.add(new RPlayer(hand));
+
         }
 
         if (hasAction(topCard.getCard())){
@@ -58,19 +67,19 @@ public class Game implements IGame{
                 currentTurn = currentTurn+ players.size();
             }
             currentPlayer = currentTurn%(players.size());
-            System.out.println("Current Player is Player Number" +currentPlayer);
+
             this.player = players.get(currentPlayer);
+            System.out.println("Current Player is " +player.getName());
 
             System.out.println("The top card is " + topCard.toString());
             player.takeTurn(this);
             if(player.handSize()==0 ){
-                System.out.println("Player " + currentPlayer +" has won the game!");
+                System.out.println("Player " + player.getName() +" has won the game!");
                 this.displayGameOver();
                 gameInProgress=false;
             }
-
-                //do this after every turn
-                //turn direction will go back and forth
+            //do this after every turn
+            //turn direction will go back and forth
                 currentTurn = currentTurn + turnDirection;
             }
         System.out.println("com.improving.Game Over");
@@ -89,8 +98,7 @@ public class Game implements IGame{
     }
 
     @Override
-    public Card draw(){
-        return deck.draw();
+    public Card draw(){ return deck.draw();
     }
 
     @Override
@@ -123,10 +131,9 @@ public class Game implements IGame{
         if(currentTurn<=0){
             currentTurn = currentTurn+ 5*players.size();
         }
-        var nextPlayerIndex = (currentTurn+2*turnDirection)% players.size();
-        IPlayerInfo nextPLayer = players.get(nextPlayerIndex);
-        return nextPLayer;
-
+        var nextNextPlayerIndex = (currentTurn+2*turnDirection)% players.size();
+        IPlayerInfo nextNextPLayer = players.get(nextNextPlayerIndex);
+        return nextNextPLayer;
     }
     public IDeck getDeckInfo(){
         IDeck deckInfo = this.deck;
@@ -299,4 +306,6 @@ public class Game implements IGame{
                             " Y888P  YP   YP YP  YP  YP Y88888P    `Y88P'     YP    Y88888P 88   YD");
         System.out.println();
     }
+
+
 }

@@ -6,6 +6,7 @@ import java.util.Collections;
 public class RPlayer implements IPlayer {
 
     private ArrayList<Card> hand = new ArrayList<>();
+    private String name = "Neutral Player";
 
     public RPlayer() {
     }
@@ -14,6 +15,10 @@ public class RPlayer implements IPlayer {
         this.hand = hand;
     }
 
+    @Override
+    public String getName(){
+        return name;
+    }
     @Override
     public int handSize() {
         return hand.size();
