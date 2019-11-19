@@ -9,7 +9,7 @@ public class App {
         System.out.println("How many players?");
         int numPlayers=scanner.nextInt();
         Game g = new Game(numPlayers);
-        g.Play(g);
+        g.play(numPlayers);
 
 
     }

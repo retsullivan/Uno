@@ -15,7 +15,7 @@ public class AIPlayer extends RPlayer {
     }
 
     @Override
-    public int getHandSize() {
+    public int handSize() {
         return hand.size();
     }
 
@@ -46,7 +46,7 @@ public class AIPlayer extends RPlayer {
             }
         }
         if (hand.size() == 1) {
-            game.yellUno();
+            yellUno();
         }
     }
 
@@ -188,6 +188,19 @@ public class AIPlayer extends RPlayer {
     private Card optimalCardFromHand(Game game) {
         Card optimalCard = new Card();
         return optimalCard;
+    }
+
+    public void yellUno(){
+        System.out.println();
+        System.out.println("Player " + this+ " yelled");;
+        System.out.println( "db    db d8b   db  .d88b. \n" +
+                "88    88 888o  88 .8P  Y8.\n" +
+                "88    88 88V8o 88 88    88\n" +
+                "88    88 88 V8o88 88    88\n" +
+                "88b  d88 88  V888 `8b  d8'\n" +
+                "~Y8888P' VP   V8P  `Y88P' ");
+
+        System.out.println();
     }
 
 }

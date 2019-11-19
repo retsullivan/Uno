@@ -23,7 +23,7 @@ public class PlayerTest {
         //act
         this.player = new RPlayer(playerHand);
 
-        assertTrue(playerHand.size()== player.getHandSize());
+        assertTrue(playerHand.size()== player.handSize());
 
     }
 
@@ -97,7 +97,7 @@ public class PlayerTest {
         game.setTopCard(new Card(Faces.Five, Colors.Blue), Colors.Blue);
         playerHand.add(card1);
         this.player = new RPlayer(playerHand);
-        var startingHandSize = player.getHandSize();
+        var startingHandSize = player.handSize();
         game.addPlayer(player);
         game.setNumPlayers(1);
         //Act
@@ -105,7 +105,7 @@ public class PlayerTest {
         player.playCard(card1, game);
 
         //Assert
-        assertEquals(startingHandSize-1, player.getHandSize());
+        assertEquals(startingHandSize-1, player.handSize());
     }
 
     @Test
