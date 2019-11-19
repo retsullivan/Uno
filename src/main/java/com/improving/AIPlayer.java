@@ -1,3 +1,5 @@
+package com.improving;
+
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -7,7 +9,7 @@ import static java.util.stream.Collectors.toMap;
 public class AIPlayer implements IPlayer {
 
     private ArrayList<Card> hand = new ArrayList<>();
-    //private Card card = new Card();
+    //private com.improving.Card card = new com.improving.Card();
     public AIPlayer() {    }
 
     public AIPlayer(ArrayList<Card> hand) {
@@ -281,15 +283,15 @@ public class AIPlayer implements IPlayer {
         return optimizedFace;
     }
 
-//    public Card getMostCommonCardInDiscardPile(IGame game) {
+//    public com.improving.Card getMostCommonCardInDiscardPile(com.improving.IGame game) {
 //        //this checks to see if you have a card in your hand that is the same color as the one
 //        //that has been played most often in the game
 //        Map<String, Long> rankedCards = getRankedCards(game);
 //        List<String> cardNames = new ArrayList<>(rankedCards.keySet());
-//        Card optimizedCard = new Card();
+//        com.improving.Card optimizedCard = new com.improving.Card();
 //
 //        for (int i =cardNames.size()-1;i>=0;i--){
-//            for (Card card:this.hand) {
+//            for (com.improving.Card card:this.hand) {
 //                if(!hasAction(card)&& card.toString().equalsIgnoreCase(cardNames.get(i))){ //this may need to be less strict
 //                    optimizedCard = card;
 //                    return optimizedCard;

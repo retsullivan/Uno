@@ -1,3 +1,4 @@
+import com.improving.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -79,8 +80,8 @@ public class PlayerTest {
 //        this.deck = deck;
 //        game.arrangeStartingDeck(deck);
 //        //act
-//        Card topOfDrawPile = game.getDeck().getDrawPile().get(0);
-//        Card drawnCard = player.drawCard(game);
+//        com.improving.Card topOfDrawPile = game.getDeck().getDrawPile().get(0);
+//        com.improving.Card drawnCard = player.drawCard(game);
 //
 //        //assert
 //        assertTrue(drawnCard.toString().equalsIgnoreCase(topOfDrawPile.toString()));
@@ -140,7 +141,7 @@ public class PlayerTest {
 //       // arrange
 //        this.hand = hand.getStartingHand(deck);
 //        player.getHand.gets(deck);
-//        deck.addCardToDiscardPile(new Card(Faces.Draw2, Colors.Blue));
+//        deck.addCardToDiscardPile(new com.improving.Card(com.improving.Faces.Draw2, com.improving.Colors.Blue));
 //        game.setDeck(deck);
 //        var startingSize = player.getHand().getHand().size();
 //        //act
@@ -156,7 +157,7 @@ public class PlayerTest {
 //    public void takeTurn_adds_4_Cards_if_topCard_is_Draw4(){
 //        // arrange
 //        player.getStartingHand(deck);
-//        deck.addCardToDiscardPile(new Card(Faces.Draw4, Colors.Wild));
+//        deck.addCardToDiscardPile(new com.improving.Card(com.improving.Faces.Draw4, com.improving.Colors.Wild));
 //        game.setDeck(deck);
 //        var startingSize = player.getHand().getHand().size();
 //        //act
@@ -172,7 +173,7 @@ public class PlayerTest {
 //    public void if_Draw_4_rest_of_turn_skipped(){
 //        // arrange
 //        player.getStartingHand(deck);
-//        deck.addCardToDiscardPile(new Card(Faces.Draw4, Colors.Wild));
+//        deck.addCardToDiscardPile(new com.improving.Card(com.improving.Faces.Draw4, com.improving.Colors.Wild));
 //        game.setDeck(deck);
 //
 //        //act
@@ -186,7 +187,7 @@ public class PlayerTest {
 //    @Test
 //    public void if_skipThisTurn_true_PreviousTurnSkippedToggled_to_True(){
 //        player.getStartingHand(deck);
-//        deck.addCardToDiscardPile(new Card(Faces.Draw4, Colors.Wild));
+//        deck.addCardToDiscardPile(new com.improving.Card(com.improving.Faces.Draw4, com.improving.Colors.Wild));
 //        game.setDeck(deck);
 //        //act
 //        player.takeTurn(game);
@@ -197,7 +198,7 @@ public class PlayerTest {
 //    @Test
 //    public void if_PreviousTurnSkippedToggled_is_True_skip_turn_false(){
 //
-//        deck.addCardToDiscardPile(new Card(Faces.Draw4, Colors.Wild));
+//        deck.addCardToDiscardPile(new com.improving.Card(com.improving.Faces.Draw4, com.improving.Colors.Wild));
 //        game.setDeck(deck);
 //        game.setPreviousTurnSkipped(true);
 //        player.getStartingHand(deck);

@@ -1,3 +1,5 @@
+package com.improving;
+
 public class TopCard {
 
     private Card card;
@@ -29,7 +31,7 @@ public class TopCard {
 
     @Override
     public String toString(){
-        //Faces.Draw4, Colors.Blue is the fake card that "playedCard" is automatically
+        //com.improving.Faces.Draw4, com.improving.Colors.Blue is the fake card that "playedCard" is automatically
         //set to at the beginning of a turn if that is the card that is returned,
         // that means that the player was not able to play any card at all
 //        if (color.toString().equalsIgnoreCase("Blue")&&face.toString().equalsIgnoreCase("Draw4")){

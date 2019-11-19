@@ -1,3 +1,4 @@
+import com.improving.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -81,8 +82,8 @@ public class AIPlayerTests {
 //        this.deck = deck;
 //        game.arrangeStartingDeck(deck);
 //        //act
-//        Card topOfDrawPile = game.getDeck().getDrawPile().get(0);
-//        Card drawnCard = player.drawCard(game);
+//        com.improving.Card topOfDrawPile = game.getDeck().getDrawPile().get(0);
+//        com.improving.Card drawnCard = player.drawCard(game);
 //
 //        //assert
 //        assertTrue(drawnCard.toString().equalsIgnoreCase(topOfDrawPile.toString()));
@@ -133,7 +134,7 @@ public class AIPlayerTests {
     @Test
     public void discard_color_Count_is_correct(){
         //arrange
-        this.game = arrangColorCountTestConditions(game);
+        this.game = arrangeColorCountTestConditions(game);
         //act
         Map<Colors, Long> discardColorCount = player.getDiscardColorCount(game);
         //assert
@@ -148,7 +149,7 @@ public class AIPlayerTests {
     public void discard_color_Count_Ranks_are_correct(){
         //This method sorts the number of card of each color in the deck from highest to lowest
         //You can't easily do it in reverse order, so remember to expect it to be backwards
-        this.game = arrangColorCountTestConditions(game);
+        this.game = arrangeColorCountTestConditions(game);
         //act
         Map<Colors, Long> rankedColors = player.getRankedColors(game);
         List<Colors> orderedColors = rankedColors.keySet().stream().collect(Collectors.toList());
@@ -230,7 +231,7 @@ public class AIPlayerTests {
 
     }
 
-    public Game arrangColorCountTestConditions(Game game){
+    public Game arrangeColorCountTestConditions(Game game){
         this.deck = deck;
         this.game = game;
         game.setNumPlayers(1);

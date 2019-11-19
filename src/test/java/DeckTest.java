@@ -1,6 +1,8 @@
+import com.improving.Card;
+import com.improving.Colors;
+import com.improving.Deck;
+import com.improving.Faces;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +27,7 @@ public class DeckTest {
 //        //arrange
 //        this.deck = deck;
 //        var beforeSize = deck.getDrawPile().size();
-//        ArrayList<Card> cards =  deck.getDrawPile();
+//        ArrayList<com.improving.Card> cards =  deck.getDrawPile();
 //        //act
 //        //assert
 //        assertTrue(cards.get(0)==deck.draw());

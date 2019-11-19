@@ -1,9 +1,11 @@
+package com.improving;
+
 import java.util.*;
 
-public class AIGame implements IGame{
+public class Game implements IGame{
     public Deck deck = new Deck();
     private ArrayList<IPlayer> players = new ArrayList<>();
-    private IPlayer player= new AIPlayer();
+    private IPlayer player= new RPlayer();
     private IPlayerInfo opposingPlayers = new RPlayer();
     boolean gameInProgress = true;
     private TopCard topCard = new TopCard();
@@ -14,9 +16,9 @@ public class AIGame implements IGame{
     private Map<IPlayer, Integer> opposingPlayerHandSizes= new HashMap<>();
 
 
-    public AIGame(){
+    public Game(){
     }
-    public AIGame(int numPlayers){
+    public Game(int numPlayers){
         this.numPlayers = numPlayers;
     }
 
@@ -40,14 +42,9 @@ public class AIGame implements IGame{
         turnDirection = 1;
         this.deck=this.getDeck();
         arrangeStartingDeck(deck);    //getting deck ready
-
         for (int i = 0; i <numPlayers ; i++) {      //creating players with starting hands
             ArrayList<Card> hand = getStartingHand(deck);
-            if (i==numPlayers-1) {
-                players.add(new AIPlayer(hand));
-            } else{
-                players.add(new RPlayer(hand));
-            }
+            players.add(new RPlayer(hand));
         }
 
         if (hasAction(topCard.getCard())){
@@ -72,12 +69,16 @@ public class AIGame implements IGame{
                 gameInProgress=false;
             }
 
-            //do this after every turn
-            //turn direction will go back and forth
-            currentTurn = currentTurn + turnDirection;
+                //do this after every turn
+                //turn direction will go back and forth
+                currentTurn = currentTurn + turnDirection;
+            }
+        System.out.println("com.improving.Game Over");
         }
-        System.out.println("Game Over");
-    }
+
+
+
+
 
     public void arrangeStartingDeck(Deck deck){
         this.deck=deck;
@@ -136,7 +137,7 @@ public class AIGame implements IGame{
     public void setTopCard(Card card, Colors declaredColor){
         topCard.setCard(card);
 
-        if (declaredColor==Colors.Wild){
+        if (declaredColor.toString().equalsIgnoreCase("wild")){
             Random random = new Random();
             int number = random.nextInt(100000)%4;
             if (number==0){
@@ -153,12 +154,12 @@ public class AIGame implements IGame{
     }
 
     public ArrayList<Card> getStartingHand(Deck deck){
-        this.deck=deck;
-        ArrayList<Card> hand = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            hand.add(deck.draw());
-        }
-        return hand;
+            this.deck=deck;
+            ArrayList<Card> hand = new ArrayList<>();
+            for (int i = 0; i < 7; i++) {
+                hand.add(deck.draw());
+            }
+            return hand;
     }
 
     @Override
@@ -166,11 +167,11 @@ public class AIGame implements IGame{
         this.topCard = topCard;
         Card fromHand = card;
         boolean playable = false;
-        if (fromHand.getFace()==topCard.getCard().getFace() ||
-                fromHand.getColor()==topCard.getDeclaredColor() ||
-                fromHand.getColor()==Colors.Wild) {
-            playable = true;
-        }
+            if (fromHand.getFace().toString().equalsIgnoreCase(topCard.getCard().getFace().toString()) ||
+                    fromHand.getColor().toString().equals(topCard.getDeclaredColor().toString()) ||
+                    fromHand.getColor().toString().equalsIgnoreCase("wild")) {
+                playable = true;
+            }
         return playable;
     }
 
@@ -186,14 +187,14 @@ public class AIGame implements IGame{
             } else {
                 topCard.setDeclaredColor(forcePickValidDeclaredColor());
                 topCard.setCard(card);
-            }
+                }
         } else if (declaredColor.isPresent()) {
             //check to make sure the declared color makes sense
             if (isValidDeclaredColor(declaredColor) == false) {
                 declaredColor = Optional.ofNullable(forcePickValidDeclaredColor());
             }
             topCard.setCard(card);
-            topCard.setDeclaredColor(declaredColor.orElseThrow()); //this will never throw
+                topCard.setDeclaredColor(declaredColor.orElseThrow()); //this will never throw
         }
         if (player.handSize() != 0) {
             if (hasAction(topCard.getCard())) {
@@ -219,44 +220,44 @@ public class AIGame implements IGame{
 
     }
 
-    public void executeCardAction(Card card,IGame game){
-        if (Faces.Draw2.equals(card.getFace())) {
-            if(currentTurn<=0){
-                currentTurn = currentTurn+ players.size();
-            }
-            var nextPlayerIndex = (currentTurn+turnDirection)% players.size();
-            //RPlayers.get(nextPlayerIndex);
-            players.get(nextPlayerIndex).draw(this);
-            players.get(nextPlayerIndex).draw(this);
-            //this skips the next player
-            currentTurn = currentTurn + turnDirection;
-            System.out.println("Player " +nextPlayerIndex+ " drew 2 and skipped their turn.");
-        } else if (Faces.Draw4.equals(card.getFace())) {
-            if(currentTurn<=0){
-                currentTurn = currentTurn+ players.size();
-            }
-            var nextPlayerIndex = (currentTurn+turnDirection)% players.size();
+    public void executeCardAction(Card card,Game game){
+            if (Faces.Draw2.equals(card.getFace())) {
+                if(currentTurn<=0){
+                    currentTurn = currentTurn+ players.size();
+                }
+                var nextPlayerIndex = (currentTurn+turnDirection)% players.size();
+                //RPlayers.get(nextPlayerIndex);
+                players.get(nextPlayerIndex).draw(this);
+                players.get(nextPlayerIndex).draw(this);
+                //this skips the next player
+                currentTurn = currentTurn + turnDirection;
+                System.out.println("Player " +nextPlayerIndex+ " drew 2 and skipped their turn.");
+            } else if (Faces.Draw4.equals(card.getFace())) {
+                if(currentTurn<=0){
+                    currentTurn = currentTurn+ players.size();
+                }
+                var nextPlayerIndex = (currentTurn+turnDirection)% players.size();
 //                RPlayers.get(nextPlayerIndex);
-            players.get(nextPlayerIndex).draw(this);
-            players.get(nextPlayerIndex).draw(this);
-            players.get(nextPlayerIndex).draw(this);
-            players.get(nextPlayerIndex).draw(this);
-            //player.drawCard(game);
-            //this skips the next player
-            currentTurn = currentTurn + turnDirection;
-            System.out.println("Player " +nextPlayerIndex+ " drew 4 and skipped their turn.");
+                players.get(nextPlayerIndex).draw(this);
+                players.get(nextPlayerIndex).draw(this);
+                players.get(nextPlayerIndex).draw(this);
+                players.get(nextPlayerIndex).draw(this);
+                //player.drawCard(game);
+                   //this skips the next player
+                currentTurn = currentTurn + turnDirection;
+                System.out.println("Player " +nextPlayerIndex+ " drew 4 and skipped their turn.");
 
-        } else if (Faces.Skip.equals(card.getFace())) {
-            if(currentTurn<=0){
-                currentTurn = currentTurn+ players.size();
+            } else if (Faces.Skip.equals(card.getFace())) {
+                if(currentTurn<=0){
+                    currentTurn = currentTurn+ players.size();
+                }
+                var nextPlayerIndex = (currentTurn+turnDirection)%players.size();
+                System.out.println("Player " +nextPlayerIndex+ " was skipped");
+                currentTurn = currentTurn+turnDirection;
+            } else if (Faces.Reverse.equals(card.getFace())) {
+                turnDirection= turnDirection*(-1);
+                System.out.println("Turn order reversed");
             }
-            var nextPlayerIndex = (currentTurn+turnDirection)%players.size();
-            System.out.println("Player " +nextPlayerIndex+ " was skipped");
-            currentTurn = currentTurn+turnDirection;
-        } else if (Faces.Reverse.equals(card.getFace())) {
-            turnDirection= turnDirection*(-1);
-            System.out.println("Turn order reversed");
-        }
     }
 
     public Boolean isValidDeclaredColor(Optional<Colors> declaredColor){
@@ -291,13 +292,11 @@ public class AIGame implements IGame{
     public void displayGameOver(){
         System.out.println();
         System.out.println(" d888b   .d8b.  .88b  d88. d88888b    .d88b.  db    db d88888b d8888b.\n" +
-                "88' Y8b d8' `8b 88'YbdP`88 88'       .8P  Y8. 88    88 88'     88  `8D\n" +
-                "88      88ooo88 88  88  88 88ooooo   88    88 Y8    8P 88ooooo 88oobY'\n" +
-                "88  ooo 88~~~88 88  88  88 88~~~~~   88    88 `8b  d8' 88~~~~~ 88`8b  \n" +
-                "88. ~8~ 88   88 88  88  88 88.       `8b  d8'  `8bd8'  88.     88 `88.\n" +
-                " Y888P  YP   YP YP  YP  YP Y88888P    `Y88P'     YP    Y88888P 88   YD");
+                            "88' Y8b d8' `8b 88'YbdP`88 88'       .8P  Y8. 88    88 88'     88  `8D\n" +
+                            "88      88ooo88 88  88  88 88ooooo   88    88 Y8    8P 88ooooo 88oobY'\n" +
+                            "88  ooo 88~~~88 88  88  88 88~~~~~   88    88 `8b  d8' 88~~~~~ 88`8b  \n" +
+                            "88. ~8~ 88   88 88  88  88 88.       `8b  d8'  `8bd8'  88.     88 `88.\n" +
+                            " Y888P  YP   YP YP  YP  YP Y88888P    `Y88P'     YP    Y88888P 88   YD");
         System.out.println();
     }
-
-
 }

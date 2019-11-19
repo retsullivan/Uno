@@ -1,3 +1,4 @@
+import com.improving.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -312,7 +313,7 @@ public class GameTest {
         game.turnDirection=1;
 
         //act
-        //game.playCard(new Card(Faces.Five, Colors.Red), java.util.Optional.of(Colors.Red));
+        //game.playCard(new com.improving.Card(com.improving.Faces.Five, com.improving.Colors.Red), java.util.Optional.of(com.improving.Colors.Red));
         boolean validColorRecognized = game.isValidDeclaredColor(java.util.Optional.of(Colors.Red));
 
         //assert

@@ -1,3 +1,6 @@
+import com.improving.Card;
+import com.improving.Colors;
+import com.improving.Faces;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -46,8 +49,8 @@ public class CardTest {
 
 //    @Test
 //    public void equals_returns_true_when_same_card(){
-//        Card card1 = new Card(Faces.Reverse, Colors.Blue);
-//        Card card2 = new Card(Faces.Reverse, Colors.Blue);
+//        com.improving.Card card1 = new com.improving.Card(com.improving.Faces.Reverse, com.improving.Colors.Blue);
+//        com.improving.Card card2 = new com.improving.Card(com.improving.Faces.Reverse, com.improving.Colors.Blue);
 //
 //        assertTrue(card.equals(card1,card2));
 //    }

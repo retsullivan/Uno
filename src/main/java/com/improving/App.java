@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package com.improving;
+
 import java.util.Scanner;
 
 public class App {
