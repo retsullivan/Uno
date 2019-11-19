@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toMap;
 
-public class AIPlayer extends RPlayer {
+public class AIPlayer implements IPlayer {
 
     private ArrayList<Card> hand = new ArrayList<>();
     //private Card card = new Card();

@@ -29,8 +29,9 @@ public class Game implements IGame{
     public TopCard getTopCard (){return topCard;}
     public void setNumPlayers(int numPlayers) {this.numPlayers = numPlayers;}
     public ArrayList<IPlayer> getRPlayers() {return players;}
-    public void addPlayer(RPlayer RPlayer) {
-        players.add(RPlayer);}
+    public void addPlayer(IPlayer player) {
+        players.add(player);
+    }
 
     @Override
     public void play(int numPlayers) {
