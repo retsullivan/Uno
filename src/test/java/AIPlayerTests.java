@@ -230,7 +230,6 @@ public class AIPlayerTests {
 
     }
 
-    
     public Game arrangColorCountTestConditions(Game game){
         this.deck = deck;
         this.game = game;
