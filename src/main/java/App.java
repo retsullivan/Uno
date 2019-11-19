@@ -12,5 +12,7 @@ public class App {
         g.play(numPlayers);
 
 
+        IGame aiGame = new AIGame(numPlayers);
+        aiGame.play(numPlayers);
     }
 }

@@ -18,7 +18,7 @@ public class RPlayer implements IPlayer {
     }
 
     @Override
-    public void takeTurn(Game game) {
+    public void takeTurn(IGame game) {
             boolean cardPlayed = false;
             for (Card card : hand) {
                 if (cardPlayed == false) {
@@ -42,19 +42,19 @@ public class RPlayer implements IPlayer {
         }
 
         @Override
-        public Card draw(Game game) {
+        public Card draw(IGame game) {
             Card card = game.draw();
             hand.add(card);
             return card;
         }
 
-        public void playCard(Card card, Game game) {
+        public void playCard(Card card, IGame game) {
             Colors declaredcolor = declareColor(card, game);
             hand.remove(card);
             game.playCard(card, java.util.Optional.ofNullable(declaredcolor));
         }
 
-        public Colors declareColor(Card card, Game game) {
+        public Colors declareColor(Card card, IGame game) {
             //keeping game in here because I'm going to add code to choose the ideal
             //color to declare based on the state of the game
             var declaredColor = card.getColor();

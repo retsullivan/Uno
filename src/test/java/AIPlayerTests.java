@@ -225,6 +225,15 @@ public class AIPlayerTests {
         assertEquals( 0,rankedCardTally.indexOf(card2.toString()));
     }
 
+    @Test
+    public void card_to_String_working(){
+
+    }
+
+
+
+
+
 
     public Game arrangColorCountTestConditions(Game game){
         this.deck = deck;
@@ -273,6 +282,25 @@ public class AIPlayerTests {
         deck.addCardToDiscardPile(new Card(Faces.Draw4,Colors.Wild));
         deck.addCardToDiscardPile(new Card(Faces.Two, Colors.Blue));
 
+
+        return game;
+    }
+    public Game arrangeCardCountTestConditions(Game game){
+        this.deck = deck;
+        this.game = game;
+        game.setNumPlayers(1);
+        playerHand.add(new Card(Faces.Wild,Colors.Wild));
+        game.arrangeStartingDeck(deck);
+        Card topCard = game.getTopCard().getCard();
+        deck.getDiscardPile().remove(topCard);
+
+        this.player = new AIPlayer(playerHand);
+        deck.addCardToDiscardPile(new Card(Faces.Wild,Colors.Wild));
+        deck.addCardToDiscardPile(new Card(Faces.Wild,Colors.Wild));
+        deck.addCardToDiscardPile(new Card(Faces.Wild,Colors.Wild));
+        deck.addCardToDiscardPile(new Card(Faces.Five,Colors.Red));
+        deck.addCardToDiscardPile(new Card(Faces.Five,Colors.Red));
+        deck.addCardToDiscardPile(new Card(Faces.Two, Colors.Blue));
 
         return game;
     }
