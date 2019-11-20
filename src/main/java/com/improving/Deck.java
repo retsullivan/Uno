@@ -36,7 +36,7 @@ public class Deck implements IDeck{
         if (drawPile.size()==0){
             Card topCard = discardPile.get(0);
             discardPile.remove(0);
-            drawPile.addAll(discardPile);
+            drawPile.addAll(discardPile); //this puts all the cards in the discard pile into the draw pile
             discardPile.clear();
             Collections.shuffle(drawPile);
             discardPile.add(topCard);
@@ -45,8 +45,6 @@ public class Deck implements IDeck{
         drawPile.remove(0);
         return card;
     }
-
-
 
     public ArrayList<Card> shuffle(ArrayList<Card> cards){
         this.drawPile =cards;
