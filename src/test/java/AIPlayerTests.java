@@ -1,3 +1,4 @@
+import com.improving.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,10 +17,6 @@ public class AIPlayerTests {
     ArrayList<Card> playerHand = new ArrayList<>();
     AIPlayer player = new AIPlayer();
     Game game = new Game();
-    //Card card = new Card();
-
-
-
 
     @Test
     public void getHandSize_returns_correct_HandSize(){
@@ -29,7 +26,7 @@ public class AIPlayerTests {
         //act
         this.player = new AIPlayer(playerHand);
 
-        assertTrue(playerHand.size()== player.getHandSize());
+        assertTrue(playerHand.size()== player.handSize());
 
     }
 
@@ -85,8 +82,8 @@ public class AIPlayerTests {
 //        this.deck = deck;
 //        game.arrangeStartingDeck(deck);
 //        //act
-//        Card topOfDrawPile = game.getDeck().getDrawPile().get(0);
-//        Card drawnCard = player.drawCard(game);
+//        com.improving.Card topOfDrawPile = game.getDeck().getDrawPile().get(0);
+//        com.improving.Card drawnCard = player.drawCard(game);
 //
 //        //assert
 //        assertTrue(drawnCard.toString().equalsIgnoreCase(topOfDrawPile.toString()));
@@ -103,7 +100,7 @@ public class AIPlayerTests {
         game.setTopCard(new Card(Faces.Five, Colors.Blue), Colors.Blue);
         playerHand.add(card1);
         this.player = new AIPlayer(playerHand);
-        var startingHandSize = player.getHandSize();
+        var startingHandSize = player.handSize();
         game.addPlayer(player);
         game.setNumPlayers(1);
         //Act
@@ -111,7 +108,7 @@ public class AIPlayerTests {
         player.playCard(card1, game);
 
         //Assert
-        assertEquals(startingHandSize-1, player.getHandSize());
+        assertEquals(startingHandSize-1, player.handSize());
     }
 
     @Test
@@ -137,7 +134,7 @@ public class AIPlayerTests {
     @Test
     public void discard_color_Count_is_correct(){
         //arrange
-        this.game = arrangColorCountTestConditions(game);
+        this.game = arrangeColorCountTestConditions(game);
         //act
         Map<Colors, Long> discardColorCount = player.getDiscardColorCount(game);
         //assert
@@ -152,7 +149,7 @@ public class AIPlayerTests {
     public void discard_color_Count_Ranks_are_correct(){
         //This method sorts the number of card of each color in the deck from highest to lowest
         //You can't easily do it in reverse order, so remember to expect it to be backwards
-        this.game = arrangColorCountTestConditions(game);
+        this.game = arrangeColorCountTestConditions(game);
         //act
         Map<Colors, Long> rankedColors = player.getRankedColors(game);
         List<Colors> orderedColors = rankedColors.keySet().stream().collect(Collectors.toList());
@@ -190,8 +187,47 @@ public class AIPlayerTests {
         assertEquals( 0,orderedFaces.indexOf(Faces.Two));
     }
 
+    @Test
+    public void discard_count_has_correct_number_of_entries(){
+        this.game = arrangeCardCountTestConditions(game);
 
-    public Game arrangColorCountTestConditions(Game game){
+        int numDiscardCardCountEntries = player.getDiscardCardCount(game).size();
+        assertEquals( 3, numDiscardCardCountEntries);
+    }
+
+    @Test
+    public void discard_count_correct(){
+        this.game = arrangeCardCountTestConditions(game);
+
+        Card card1 = new Card(Faces.Wild,Colors.Wild);
+        Card card2 = new Card(Faces.Two, Colors.Blue);
+        Card card3 = new Card(Faces.Five, Colors.Red);
+
+        Map<String, Long> discardCardCount = player.getDiscardCardCount(game);
+
+        assertEquals( 3,discardCardCount.get(card1.toString())); //need to define equals or something
+        assertEquals( 2,discardCardCount.get(card3.toString()));
+        assertEquals( 1,discardCardCount.get(card2.toString()));
+    }
+
+    @Test
+    public void discard_pile_card_counts_ranked_correctly(){
+        this.game = arrangeCardCountTestConditions(game);
+
+        Card card1 = new Card(Faces.Wild,Colors.Wild);
+        Card card2 = new Card(Faces.Two, Colors.Blue);
+        Card card3 = new Card(Faces.Five, Colors.Red);
+
+        Map<String, Long> discardCardCount = player.getRankedCards(game);
+        List<String> rankedCardTally = discardCardCount.keySet().stream().collect(Collectors.toList());
+
+        assertEquals( 2,rankedCardTally.indexOf(card1.toString())); //need to define equals or something
+        assertEquals( 1,rankedCardTally.indexOf(card3.toString()));
+        assertEquals( 0,rankedCardTally.indexOf(card2.toString()));
+    }
+
+
+    public Game arrangeColorCountTestConditions(Game game){
         this.deck = deck;
         this.game = game;
         game.setNumPlayers(1);
@@ -240,8 +276,28 @@ public class AIPlayerTests {
 
 
         return game;
-
     }
+    public Game arrangeCardCountTestConditions(Game game){
+        this.deck = deck;
+        this.game = game;
+        game.setNumPlayers(1);
+        playerHand.add(new Card(Faces.Wild,Colors.Wild));
+        game.arrangeStartingDeck(deck);
+        Card topCard = game.getTopCard().getCard();
+        deck.getDiscardPile().remove(topCard);
+
+        this.player = new AIPlayer(playerHand);
+        deck.addCardToDiscardPile(new Card(Faces.Wild,Colors.Wild));
+        deck.addCardToDiscardPile(new Card(Faces.Wild,Colors.Wild));
+        deck.addCardToDiscardPile(new Card(Faces.Wild,Colors.Wild));
+        deck.addCardToDiscardPile(new Card(Faces.Five,Colors.Red));
+        deck.addCardToDiscardPile(new Card(Faces.Five,Colors.Red));
+        deck.addCardToDiscardPile(new Card(Faces.Two, Colors.Blue));
+
+        return game;
+    }
+
+
 
 
 }

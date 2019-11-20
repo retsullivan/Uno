@@ -1,3 +1,4 @@
+import com.improving.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -145,9 +146,9 @@ public class GameTest {
         //Act
 
         //Assert
-        assertEquals(7, RPlayer1.getHandSize());
-        assertEquals(11, RPlayer2.getHandSize());
-        assertEquals(7, RPlayer3.getHandSize());
+        assertEquals(7, RPlayer1.handSize());
+        assertEquals(11, RPlayer2.handSize());
+        assertEquals(7, RPlayer3.handSize());
     }
 
     @Test
@@ -178,9 +179,9 @@ public class GameTest {
         //Act
 
         //Assert
-        assertEquals(7, RPlayer1.getHandSize());
-        assertEquals(7, RPlayer2.getHandSize());
-        assertEquals(9, RPlayer3.getHandSize());
+        assertEquals(7, RPlayer1.handSize());
+        assertEquals(7, RPlayer2.handSize());
+        assertEquals(9, RPlayer3.handSize());
     }
 
     @Test
@@ -268,7 +269,7 @@ public class GameTest {
         RPlayer1.playCard(new Card(Faces.Two,Colors.Red), game);
         RPlayer2.playCard(new Card(Faces.Two,Colors.Blue), game);
 
-        assertEquals(deck.allCardsInDeck.size()+2, deck.getDrawPileSize() +deck.getDiscardPile().size()+ RPlayer1.getHandSize() + RPlayer2.getHandSize());
+        assertEquals(deck.allCardsInDeck.size()+2, deck.getDrawPileSize() +deck.getDiscardPile().size()+ RPlayer1.handSize() + RPlayer2.handSize());
     }
 
     @Test
@@ -312,7 +313,7 @@ public class GameTest {
         game.turnDirection=1;
 
         //act
-        //game.playCard(new Card(Faces.Five, Colors.Red), java.util.Optional.of(Colors.Red));
+        //game.playCard(new com.improving.Card(com.improving.Faces.Five, com.improving.Colors.Red), java.util.Optional.of(com.improving.Colors.Red));
         boolean validColorRecognized = game.isValidDeclaredColor(java.util.Optional.of(Colors.Red));
 
         //assert

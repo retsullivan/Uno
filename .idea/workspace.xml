@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15505e80-b873-443e-b7aa-b14c11264f1b" name="Default Changelist" comment="">
+    <list default="true" id="7f3cadd9-f27d-4cc1-999b-1859621e2529" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/test/java/AIPlayerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AIPlayerTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/AIPlayerTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/AIPlayerTests.class" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/AIPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Deck.java" afterDir="false" />
+>>>>>>> e50a824
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +22,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -56,17 +62,26 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="JUnit.GameTest">
     <configuration name="AIPlayerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+=======
+  <component name="RunManager" selected="Application.App">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.improving.App" />
       <module name="Uno" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AIPlayerTests" />
-      <option name="TEST_OBJECT" value="class" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.improving.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="CardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+>>>>>>> e50a824
       <module name="Uno" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="CardTest" />
@@ -93,6 +108,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Uno" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GameTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PlayerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Uno" />
       <option name="PACKAGE_NAME" value="" />
@@ -104,11 +128,19 @@
     </configuration>
     <recent_temporary>
       <list>
+<<<<<<< HEAD
         <item itemvalue="JUnit.GameTest" />
         <item itemvalue="JUnit.AIPlayerTests" />
         <item itemvalue="JUnit.CardTest" />
         <item itemvalue="JUnit.DeckTest" />
         <item itemvalue="JUnit.PlayerTest" />
+=======
+        <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.PlayerTest" />
+        <item itemvalue="JUnit.GameTest" />
+        <item itemvalue="JUnit.DeckTest" />
+        <item itemvalue="JUnit.CardTest" />
+>>>>>>> e50a824
       </list>
     </recent_temporary>
   </component>
@@ -117,7 +149,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="15505e80-b873-443e-b7aa-b14c11264f1b" name="Default Changelist" comment="" />
+      <changelist id="7f3cadd9-f27d-4cc1-999b-1859621e2529" name="Default Changelist" comment="" />
       <created>1573223324659</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -186,7 +218,21 @@
       <option name="project" value="LOCAL" />
       <updated>1574087419277</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="AI working &amp; winning, will add more tests">
+      <created>1574142193010</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1574142193010</updated>
+    </task>
+    <task id="LOCAL-00011" summary="refactored into the com.improving package">
+      <created>1574142568127</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1574142568127</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -212,15 +258,18 @@
     <MESSAGE value="added optional return of declared color, validation tests for declared color and unit tests to make sure it worked.  All tests passing currently." />
     <MESSAGE value="Friday Afternoon Commit - all unit tests passing" />
     <MESSAGE value="Monday Am - implemented standardized interfaces" />
-    <option name="LAST_COMMIT_MESSAGE" value="Monday Am - implemented standardized interfaces" />
+    <MESSAGE value="AI working &amp; winning, will add more tests" />
+    <MESSAGE value="refactored into the com.improving package" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactored into the com.improving package" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AIPlayer.java</url>
-          <line>151</line>
-          <option name="timeStamp" value="1" />
+          <condition expression="discardPile.size()==1 &amp;&amp; drawPile.size() ==0" language="JAVA" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/improving/Deck.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Deck.java</url>

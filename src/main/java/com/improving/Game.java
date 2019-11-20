@@ -1,10 +1,14 @@
+package com.improving;
+
+import org.testng.log4testng.Logger;
+
 import java.util.*;
 
 public class Game implements IGame{
-    //todo: instance variables should be private and utilize setters / getters to access externally
     public Deck deck = new Deck();
     private ArrayList<IPlayer> players = new ArrayList<>();
     private IPlayer player= new RPlayer();
+    private IPlayerInfo opposingPlayers = new RPlayer();
     boolean gameInProgress = true;
     private TopCard topCard = new TopCard();
     private int numPlayers;
@@ -13,19 +17,17 @@ public class Game implements IGame{
     public int currentTurn = 0;
     private Map<IPlayer, Integer> opposingPlayerHandSizes= new HashMap<>();
 
+    private Logger logger;
+    private IPlayer winningPlayer = null;
+
+    public IPlayer getWinningPlayer() {
+        return winningPlayer;
+    }
 
     public Game(){
     }
     public Game(int numPlayers){
         this.numPlayers = numPlayers;
-    }
-
-    public Map<IPlayer, Integer> getOpposingPlayerHandSize(){
-        this.opposingPlayerHandSizes = opposingPlayerHandSizes;
-        for (IPlayer player: players){
-            opposingPlayerHandSizes.put(player, player.getHandSize());
-        }
-        return opposingPlayerHandSizes;
     }
 
     public Deck getDeck() {
@@ -37,23 +39,25 @@ public class Game implements IGame{
     public TopCard getTopCard (){return topCard;}
     public void setNumPlayers(int numPlayers) {this.numPlayers = numPlayers;}
     public ArrayList<IPlayer> getRPlayers() {return players;}
-    public void addPlayer(RPlayer RPlayer) {
-        players.add(RPlayer);}
+    public void addPlayer(IPlayer player) {
+        players.add(player);
+    }
 
-    public void Play(Game game) {
-
+    @Override
+    public void play(int numPlayers) {
         gameInProgress = true;
         currentTurn = 0;
         turnDirection = 1;
-        this.deck=game.getDeck();
+        this.deck=this.getDeck();
         arrangeStartingDeck(deck);    //getting deck ready
         for (int i = 0; i <numPlayers ; i++) {      //creating players with starting hands
             ArrayList<Card> hand = getStartingHand(deck);
             players.add(new RPlayer(hand));
+
         }
 
         if (hasAction(topCard.getCard())){
-            executeCardAction(topCard.getCard(),game);
+            executeCardAction(topCard.getCard(),this);
         }
 
         while (gameInProgress){
@@ -63,25 +67,23 @@ public class Game implements IGame{
                 currentTurn = currentTurn+ players.size();
             }
             currentPlayer = currentTurn%(players.size());
-            System.out.println("Current Player is Player Number" +currentPlayer);
+
             this.player = players.get(currentPlayer);
+            System.out.println("Current Player is " +player.getName());
 
             System.out.println("The top card is " + topCard.toString());
-            player.takeTurn(game);
-            if(player.getHandSize()==0 ){
-                System.out.println("Player " + currentPlayer +" has won the game!");
-                game.displayGameOver();
+            player.takeTurn(this);
+            if(player.handSize()==0 ){
+                System.out.println("Player " + player.getName() +" has won the game!");
+                this.displayGameOver();
                 gameInProgress=false;
             }
-
-                //do this after every turn
-                //turn direction will go back and forth
+            //do this after every turn
+            //turn direction will go back and forth
                 currentTurn = currentTurn + turnDirection;
             }
-        System.out.println("Game Over");
+        System.out.println("com.improving.Game Over");
         }
-
-
 
 
 
@@ -96,8 +98,46 @@ public class Game implements IGame{
     }
 
     @Override
-    public Card draw(){
-        return deck.draw();
+    public Card draw(){ return deck.draw();
+    }
+
+    @Override
+    public List<IPlayerInfo> getPlayerInfo(){
+        this.players = players;
+        List<IPlayerInfo> playerInfo = new ArrayList<>();
+        for (IPlayer player: players){
+            playerInfo.add(player);
+        }
+        return playerInfo;
+    }
+    public IPlayerInfo getNextPlayer(){
+        if(currentTurn<=0){
+            currentTurn = currentTurn+ players.size();
+        }
+        var nextPlayerIndex = (currentTurn+turnDirection)% players.size();
+        IPlayerInfo nextPLayer = players.get(nextPlayerIndex);
+        return nextPLayer;
+    }
+    public IPlayerInfo getPreviousPlayer(){
+        if(currentTurn<=0){
+            currentTurn = currentTurn+ players.size();
+        }
+        var previousPlayerIndex = (currentTurn-turnDirection)% players.size();
+        IPlayerInfo previousPLayer = players.get(previousPlayerIndex);
+        return previousPLayer;
+
+    }
+    public IPlayerInfo getNextNextPlayer(){
+        if(currentTurn<=0){
+            currentTurn = currentTurn+ 5*players.size();
+        }
+        var nextNextPlayerIndex = (currentTurn+2*turnDirection)% players.size();
+        IPlayerInfo nextNextPLayer = players.get(nextNextPlayerIndex);
+        return nextNextPLayer;
+    }
+    public IDeck getDeckInfo(){
+        IDeck deckInfo = this.deck;
+        return deckInfo;
     }
 
 
@@ -163,7 +203,7 @@ public class Game implements IGame{
             topCard.setCard(card);
                 topCard.setDeclaredColor(declaredColor.orElseThrow()); //this will never throw
         }
-        if (player.getHandSize() != 0) {
+        if (player.handSize() != 0) {
             if (hasAction(topCard.getCard())) {
                 executeCardAction(topCard.getCard(), this);
             }
@@ -254,18 +294,7 @@ public class Game implements IGame{
     }
 
 
-    public void yellUno(){
-        System.out.println();
-        System.out.println("Player " + currentPlayer+ " yelled");;
-        System.out.println( "db    db d8b   db  .d88b. \n" +
-                            "88    88 888o  88 .8P  Y8.\n" +
-                            "88    88 88V8o 88 88    88\n" +
-                            "88    88 88 V8o88 88    88\n" +
-                            "88b  d88 88  V888 `8b  d8'\n" +
-                            "~Y8888P' VP   V8P  `Y88P' ");
 
-        System.out.println();
-    }
 
     public void displayGameOver(){
         System.out.println();
@@ -277,4 +306,6 @@ public class Game implements IGame{
                             " Y888P  YP   YP YP  YP  YP Y88888P    `Y88P'     YP    Y88888P 88   YD");
         System.out.println();
     }
+
+
 }
