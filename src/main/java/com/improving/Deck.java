@@ -36,7 +36,7 @@ public class Deck implements IDeck{
         if (drawPile.size()==0){
             Card topCard = discardPile.get(0);
             discardPile.remove(0);
-            drawPile = discardPile;
+            drawPile.addAll(discardPile);
             discardPile.clear();
             Collections.shuffle(drawPile);
             discardPile.add(topCard);
@@ -64,13 +64,13 @@ public class Deck implements IDeck{
         discardPile.add(card);
     }
 
-    public Boolean isMember (Card card){
-        boolean cardInDeck = false;
-        if (allCardsInDeck.contains(card)){
-            cardInDeck = true;
-        }
-        return cardInDeck;
-    }
+//    public Boolean isMember (Card card){
+//        boolean cardInDeck = false;
+//        if (allCardsInDeck.contains(card)){
+//            cardInDeck = true;
+//        }
+//        return cardInDeck;
+//    }
 
     //I had to make this private so people can't cheat
     private ArrayList<Card> getDrawPile(){

@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f3cadd9-f27d-4cc1-999b-1859621e2529" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/AIGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/AIGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/AIPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Deck.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -119,7 +122,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="15505e80-b873-443e-b7aa-b14c11264f1b" name="Default Changelist" comment="" />
+      <changelist id="7f3cadd9-f27d-4cc1-999b-1859621e2529" name="Default Changelist" comment="" />
       <created>1573223324659</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -235,13 +238,11 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/improving/Game.java</url>
-          <line>100</line>
-          <properties class="com.improving.Game" method="draw">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="27" />
+        <line-breakpoint enabled="true" type="java-line">
+          <condition expression="discardPile.size()==1 &amp;&amp; drawPile.size() ==0" language="JAVA" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/improving/Deck.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

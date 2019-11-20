@@ -28,8 +28,8 @@ public class App {
         IPlayer winningPLayer = null;
         AIGame winCountGame = new AIGame();
 
-        for (int i = 0; i < 100; i++) {
-            winningPLayer = winCountGame.playGameReturnWinner(2);
+        for (int i = 0; i < 1000; i++) {
+                 winningPLayer = winCountGame.playGameReturnWinner(2);
             winCount.put(winningPLayer.getName(), winCount.get(winningPLayer.getName()) + 1);
         }
         for (var player : winCountGame.getPlayerInfo()) {

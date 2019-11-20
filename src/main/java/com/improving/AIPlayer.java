@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.toMap;
 public class AIPlayer implements IPlayer {
 
     private ArrayList<Card> hand = new ArrayList<>();
-    private String name = "Smart Player";
+    private String name = "Rachel's Player";
 
 
     public AIPlayer() {    }
